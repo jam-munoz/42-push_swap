@@ -1,7 +1,7 @@
 
 #include "push_swap.h"
 
-void num_count(int n, char *str)
+int num_count(char *str)
 {
 	int	numbers;
 
