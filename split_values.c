@@ -1,7 +1,7 @@
 
 #include "push_swap.h"
 
-int num_count(char *str)
+int	num_count(char *str)
 {
 	int	numbers;
 
@@ -20,21 +20,26 @@ int num_count(char *str)
 	return numbers;
 }
 
-void split_values(char *str, t_stack **stack_a)
+void	split_values(char *str, t_stack **stack_a, int *arr)
 {
 	int	numbers;
 	int	i;
 
 	numbers = num_count(str);
+	arr = malloc(numbers * sizeof(int));
 	i = 0;
 	while (i < numbers)
 	{
 		while (*str == ' ')
 			str++;
-		copy_data(str, stack_a);
+		//adaptarlo a push back o armar array y despues copiar todo
+		copy_data(str, stack_a, &arr[i]);
 		while (*str && *str != ' ')
 			str++;
 		i++;
 	}
+	for (int i = 0; i < numbers; i++)
+		ft_printf("arr[%d]: %d\n", i, arr[i]);
+	free(arr);
 	return ;
 }

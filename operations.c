@@ -1,6 +1,6 @@
 #include "push_swap.h"
 
-void swap(t_stack **stack)
+void	swap(t_stack **stack)
 {
 	t_stack	*temp;
 
@@ -13,7 +13,7 @@ void swap(t_stack **stack)
 	*stack = temp;
 }
 
-void push(t_stack **stack_1, t_stack **stack_2)
+void	push(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack	*temp;
 
@@ -23,7 +23,7 @@ void push(t_stack **stack_1, t_stack **stack_2)
 	*stack_1 = temp;
 }
 
-void rotate(t_stack **stack)
+void	rotate(t_stack **stack)
 {
 	t_stack	*temp;
 	t_stack	*rot;
@@ -37,7 +37,7 @@ void rotate(t_stack **stack)
 	*stack = temp;
 }
 
-void rev_rotate(t_stack **stack)
+void	rev_rotate(t_stack **stack)
 {
 	t_stack	*temp;
 	t_stack	*rot;
@@ -51,19 +51,19 @@ void rev_rotate(t_stack **stack)
 	*stack = temp;
 }
 
-void ss(t_stack **stack_a, t_stack **stack_b)
+void	ss(t_stack **stack_a, t_stack **stack_b)
 {
 	swap(stack_a);
 	swap(stack_b);
 }
 
-void rr(t_stack **stack_a, t_stack **stack_b)
+void	rr(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate(stack_a);
 	rotate(stack_b);
 }
 
-void rrr(t_stack **stack_a, t_stack **stack_b)
+void	rrr(t_stack **stack_a, t_stack **stack_b)
 {
 	rev_rotate(stack_a);
 	rev_rotate(stack_b);

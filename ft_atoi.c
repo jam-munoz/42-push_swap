@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:11:10 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/01 17:26:34 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/01 22:34:51 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits.h>
 #include "push_swap.h"
 
 void	ft_lstclear(t_stack **lst)
@@ -41,8 +42,8 @@ void	ft_putstr_fd(const char *s, int fd)
 
 int	ft_atoi(const char *nptr, t_stack **stack_a)
 {
-	int	sign;
-	int	sum;
+	int		sign;
+	long	sum;
 
 	sign = 1;
 	sum = 0;
@@ -63,6 +64,12 @@ int	ft_atoi(const char *nptr, t_stack **stack_a)
 		sum *= 10;
 		sum += *nptr - '0';
 		nptr++;
+	}
+	if (sum > INT_MAX || sum < INT_MIN)
+	{
+		ft_putstr_fd("Error.\n", STDERR_FILENO);
+		ft_lstclear(stack_a);
+		exit(0);
 	}
 	return (sum * sign);
 }
