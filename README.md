@@ -1,0 +1,11 @@
+# todo list:
+  - [x] parse arguments
+  - [x] operations
+  - [+] errors
+  - [+] validations
+  - [] insertion
+  - [] radix
+  - [] chunk
+  - [] disorder metric
+  - [] adaptive
+  - [] debug & valgrind
