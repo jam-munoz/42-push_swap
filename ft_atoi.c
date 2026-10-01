@@ -29,8 +29,14 @@ int	ft_atoi(const char *nptr)
 			sign = -1;
 		nptr++;
 	}
-	while ('0' <= *nptr && *nptr <= '9')
+	while (*nptr && *nptr != ' ')
 	{
+		if (*nptr < '0' || '9' < *nptr)
+		{
+			ft_putstr_fd("Error.\n");
+			//free all memory
+			exit(0);
+		}
 		sum *= 10;
 		sum += *nptr - '0';
 		nptr++;
