@@ -6,13 +6,19 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:11:10 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/01 22:34:51 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/01 23:20:51 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "push_swap.h"
 
+void	error_exit(t_stack **stack)
+{
+	ft_lstclear(stack);
+	write(STDERR_FILENO ,"Error.\n", 7);
+	exit(0);
+}
 void	ft_lstclear(t_stack **lst)
 {
 	t_stack	*p;
@@ -30,17 +36,7 @@ void	ft_lstclear(t_stack **lst)
 	*lst = NULL;
 }
 
-void	ft_putstr_fd(const char *s, int fd)
-{
-	const char	*p;
-
-	p = s;
-	while (*p != '\0')
-		p++;
-	write(fd, s, p - s);
-}
-
-int	ft_atoi(const char *nptr, t_stack **stack_a)
+int	ft_atoi(const char *nptr, t_stack **stack)
 {
 	int		sign;
 	long	sum;
@@ -56,20 +52,13 @@ int	ft_atoi(const char *nptr, t_stack **stack_a)
 	while (*nptr && *nptr != ' ')
 	{
 		if (*nptr < '0' || '9' < *nptr)
-		{
-			ft_putstr_fd("Error.\n", STDERR_FILENO);
-			ft_lstclear(stack_a);
-			exit(0);
-		}
+			error_exit(stack);
 		sum *= 10;
 		sum += *nptr - '0';
 		nptr++;
 	}
-	if (sum > INT_MAX || sum < INT_MIN)
-	{
-		ft_putstr_fd("Error.\n", STDERR_FILENO);
-		ft_lstclear(stack_a);
-		exit(0);
-	}
-	return (sum * sign);
+	sum *= sign;
+	if (sum < INT_MIN || sum > INT_MAX)
+		error_exit(stack);
+	return (sum);
 }
