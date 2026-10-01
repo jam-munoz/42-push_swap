@@ -57,5 +57,12 @@ int main(int argc, char *argv[])
 
 	stack_a = NULL;
 	set_stack(argc, argv, &stack_a);
+	//rotate(&stack_a);
+	//rev_rotate(&stack_a);
+	//push(&stack_a, &stack_b);
+	swap(&stack_a);
+	ft_printf("--- stack a ---\n");
 	print_data(stack_a);
+	//ft_printf("--- stack b ---\n");
+	//print_data(stack_b);
 }

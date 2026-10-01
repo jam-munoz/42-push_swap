@@ -4,17 +4,21 @@ void swap(t_stack **stack)
 {
 	t_stack	*temp;
 
-	temp = *stack->next->next;
-	*stack->next->next = *stack;
-	*stack->next = temp;
+	//proteger casos borde: sobre un stack de 0 o 1 elementos no debería hacer nada.
+	if (!stack || !*stack || !(*stack)->next)
+		return;
+	temp = (*stack)->next;
+	(*stack)->next = temp->next;
+	temp->next = *stack;
+	*stack = temp;
 }
 
 void push(t_stack **stack_1, t_stack **stack_2)
 {
 	t_stack	*temp;
 
-	temp = stack_1->next;
-	stack_1->next = *stack_2;
+	temp = (*stack_1)->next;
+	(*stack_1)->next = *stack_2;
 	*stack_2 = *stack_1;
 	*stack_1 = temp;
 }
@@ -22,23 +26,23 @@ void push(t_stack **stack_1, t_stack **stack_2)
 void rotate(t_stack **stack)
 {
 	t_stack	*temp;
-	t_stack	rot;
+	t_stack	*rot;
 
-	temp = *stack->next;
+	temp = (*stack)->next;
 	rot = temp;
 	while (rot->next != NULL)
 		rot = rot->next;
-	rot_next = *stack;
-	*stack->next = NULL;
+	rot->next = *stack;
+	(*stack)->next = NULL;
 	*stack = temp;
 }
 
 void rev_rotate(t_stack **stack)
 {
 	t_stack	*temp;
-	t_stack	rot;
+	t_stack	*rot;
 
-	rot = *stack->next;
+	rot = (*stack)->next;
 	while (rot->next->next != NULL)
 		rot = rot->next;
 	temp = rot->next;
