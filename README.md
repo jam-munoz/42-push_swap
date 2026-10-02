@@ -2,7 +2,7 @@
   - [x] parse arguments
   - [x] operations
   - [x] errors
-  - [+] validations
+  - [x] validations
   - [] make code tidier
   - [] insertion
   - [] radix
