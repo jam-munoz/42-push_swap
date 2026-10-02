@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: joamunoz <joamunoz@student.42urduliz.com>  +#+  +:+       +#+         #
+#    By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#              #
-#    Updated: 2026/10/01 17:43:24 by joamunoz         ###   ########.fr        #
+#    Updated: 2026/10/02 09:10:03 by joamunoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
 RM = rm -f
-CFLAGS = 
+CFLAGS = -Wall -Wextra -g
 
 SOURCE_FILES := $(wildcard *.c) $(wildcard ft_printf/*.c)
 

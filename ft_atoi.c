@@ -6,19 +6,13 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/06 18:11:10 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/01 23:20:51 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/02 08:42:35 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <limits.h>
 #include "push_swap.h"
 
-void	error_exit(t_stack **stack)
-{
-	ft_lstclear(stack);
-	write(STDERR_FILENO ,"Error.\n", 7);
-	exit(0);
-}
 void	ft_lstclear(t_stack **lst)
 {
 	t_stack	*p;
@@ -36,7 +30,15 @@ void	ft_lstclear(t_stack **lst)
 	*lst = NULL;
 }
 
-int	ft_atoi(const char *nptr, t_stack **stack)
+void	error_exit(t_stack **stack, int *arr)
+{
+	ft_lstclear(stack);
+	free(arr);
+	write(STDERR_FILENO ,"Error.\n", 7);
+	exit(0);
+}
+
+int	ft_atoi(const char *nptr, t_stack **stack, int *arr)
 {
 	int		sign;
 	long	sum;
@@ -52,13 +54,13 @@ int	ft_atoi(const char *nptr, t_stack **stack)
 	while (*nptr && *nptr != ' ')
 	{
 		if (*nptr < '0' || '9' < *nptr)
-			error_exit(stack);
+			error_exit(stack, arr);
 		sum *= 10;
 		sum += *nptr - '0';
 		nptr++;
 	}
 	sum *= sign;
 	if (sum < INT_MIN || sum > INT_MAX)
-		error_exit(stack);
+		error_exit(stack, arr);
 	return (sum);
 }

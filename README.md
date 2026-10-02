@@ -1,8 +1,9 @@
 # todo list:
   - [x] parse arguments
   - [x] operations
-  - [+] errors
+  - [x] errors
   - [+] validations
+  - [] make code tidier
   - [] insertion
   - [] radix
   - [] chunk

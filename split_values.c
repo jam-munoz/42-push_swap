@@ -20,26 +20,23 @@ int	num_count(char *str)
 	return numbers;
 }
 
-void	split_values(char *str, t_stack **stack_a, int *arr)
+int	split_values(char *str, t_stack **stack_a, int **arr)
 {
 	int	numbers;
 	int	i;
 
 	numbers = num_count(str);
-	arr = malloc(numbers * sizeof(int));
+	*arr = malloc(numbers * sizeof(int));
 	i = 0;
 	while (i < numbers)
 	{
 		while (*str == ' ')
 			str++;
 		//adaptarlo a push back o armar array y despues copiar todo
-		copy_data(str, stack_a, &arr[i]);
+		copy_data(str, stack_a, &(*arr)[i], *arr);
 		while (*str && *str != ' ')
 			str++;
 		i++;
 	}
-	for (int i = 0; i < numbers; i++)
-		ft_printf("arr[%d]: %d\n", i, arr[i]);
-	free(arr);
-	return ;
+	return (numbers);
 }
