@@ -1,0 +1,27 @@
+
+<svg	xmlns="http://www.w3.org/2000/svg"
+		width="160"
+		height="160"
+		viewBox="0 0 160 160">
+
+	<g>
+		<!-- Stack A -->
+		<rect	x="13" y="39" width="49" height="30"
+				rx="6" fill="#2DD4BF" stroke="#5EEAD4" stroke-width="2"/>
+
+		<rect	x="13" y="78" width="49" height="30"
+				rx="6" fill="#164E63" stroke="#2DD4BF" stroke-width="2"/>
+
+		<!-- Direction arrow -->
+		<path	d="M72 93 H99 M90 84 L99 93 L90 102"
+				fill="none"
+				stroke="#2DD4BF"
+				stroke-width="4"
+				stroke-linecap="round"
+				stroke-linejoin="round"/>
+
+		<!-- Stack B -->
+		<rect	x="110" y="59" width="40" height="30"
+				rx="6" fill="#1C2735" stroke="#94A3B8" stroke-width="2"/>
+	</g>
+</svg>

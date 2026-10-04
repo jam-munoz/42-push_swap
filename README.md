@@ -1,3 +1,59 @@
+ <div align="center">
+
+# `PUSH_SWAP`
+
+### `42` · Common Core
+
+**Sorting algorithms. Two stacks. Limited operations.**
+
+A sorting challenge focused on algorithm design, optimization and problem solving in C.
+
+<br>
+
+[![Language](https://img.shields.io/badge/Language-C-A8B9CC?style=flat-square&logo=c&logoColor=white)](https://en.wikipedia.org/wiki/C_(programming_language))
+[![School](https://img.shields.io/badge/School-42-00BABC?style=flat-square)](https://42.fr/)
+[![Status](https://img.shields.io/badge/Status-In_Progress-2DD4BF?style=flat-square)](#)
+
+<br>
+
+  <div align="center">
+    <img  src="docs/assets/banner.svg"
+          alt="Push_swap banner"
+          width="100%">
+  </div>
+
+<br>
+
+[About](#about) · [Algorithm](#algorithm) · [Usage](#usage) · [Authors](#authors)
+
+</div>
+
+---
+
+## About
+
+**Push_swap** is a 42 Common Core project in which the goal is to sort a set of integers using two stacks and a limited set of operations.
+
+The challenge is to produce a valid sequence of instructions while keeping the number of operations as low as possible.
+
+---
+
+## Algorithm
+
+*Documentation in progress.*
+
+---
+
+## Usage
+
+*Installation and usage instructions coming soon.*
+
+---
+
+## Authors
+
+*Collaborators and project information coming soon.
+
 # todo list:
   - [x] parse arguments
   - [x] operations
