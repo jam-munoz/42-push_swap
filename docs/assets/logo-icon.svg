@@ -5,7 +5,7 @@
 		height="512"
 		viewBox="0 0 1024 1024">
 
-	<rect width="1024" height="1024" fill="#080D16"/>
+	<rect width="1024" height="1024" rx="225" ry="225" fill="#080D16"/>
 
 	<defs>
 		<linearGradient id="cyanTop" x1="0" y1="0" x2="0" y2="1">
