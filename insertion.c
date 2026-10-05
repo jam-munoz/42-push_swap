@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 11:58:57 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/05 14:47:35 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/05 18:40:06 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,23 @@ int	find_insertion_position(t_stack *stack, int index)
 		stack = stack->next;
 	}
 	return (0);
+}
 
+int	find_max_position(t_stack *stack)
+{
+	int	pos;
+	int	max_index;
+
+	pos = 0;
+	max_index = get_stack_size(stack) - 1;
+	while (stack)
+	{
+		if (stack->index == max_index)
+			return (pos);
+		pos++;
+		stack = stack->next;
+	}
+	return (0);
 }
 
 void	rotate_to_position(t_stack **stack, int position)
@@ -91,6 +107,8 @@ void	insertion_sort(t_stack **stack_a, t_stack **stack_b)
 		rotate_to_position(stack_b, position);
 		pb(stack_a, stack_b);
 	}
-	// MAX TOP
-	// pa hasta vaciar B
+	position = find_max_position(stack_b);
+	rotate_to_position(stack_b, position);
+	while (*stack_b)
+		pa(stack_a, stack_a);
 }
