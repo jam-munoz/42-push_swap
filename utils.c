@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/06 15:49:38 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/06 21:34:12 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,23 @@ int	ft_strcmp(const char *s1, const char *s2)
 		s2++;
 	}
 	return ((unsigned char)*s1 - (unsigned char)*s2);
+}
+
+int	ft_sqrt(int nb)
+{
+	int	root;
+	int	result;
+
+	root = 0;
+	result = 0;
+	if (nb < 0)
+		return (0);
+	while (result < nb && root <= 46340)
+	{
+		result = root * root;
+		if (result == nb)
+			return (root);
+		root++;
+	}
+	return (root - 1);
 }
