@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 11:58:57 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/05 18:40:06 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/06 15:26:12 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 	pa -> All Elements
 */
 
-int	find_insertion_position(t_stack *stack, int index)
+static int	find_insertion_position(t_stack *stack, int index)
 {
 	t_stack	*first;
 	t_stack	*next;
@@ -61,7 +61,7 @@ int	find_insertion_position(t_stack *stack, int index)
 	return (0);
 }
 
-int	find_max_position(t_stack *stack)
+static int	find_max_position(t_stack *stack)
 {
 	int	pos;
 	int	max_index;
@@ -78,7 +78,7 @@ int	find_max_position(t_stack *stack)
 	return (0);
 }
 
-void	rotate_to_position(t_stack **stack, int position)
+static void	rotate_to_position(t_stack **stack, int position)
 {
 	int	size;
 

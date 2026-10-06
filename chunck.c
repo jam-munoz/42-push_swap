@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 15:35:53 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/05 19:27:48 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/06 14:33:01 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ void	chunk_to_postion(t_stack *stack_a, t_stack *stack_b)
 	while (stack_a)
 	{
 		if (stack_a->index >= (chunk * chunk_size)
-		&& stack_a->index < ((chunk + 1) * chunk_size))
+			&& stack_a->index < ((chunk + 1) * chunk_size))
 		{
-			pb(stack_b,stack_a);
+			pb(stack_b, stack_a);
 			counter++;
 
 		}
@@ -37,6 +37,7 @@ void	chunk_to_postion(t_stack *stack_a, t_stack *stack_b)
 		}
 	}
 }
+
 int	find_max_position(t_stack *stack, int max_index)
 {
 	int	pos;
