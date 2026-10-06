@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/06 21:34:12 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/06 21:40:34 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	ft_sqrt(int nb)
 
 	root = 0;
 	result = 0;
-	if (nb < 0)
+	if (nb <= 0)
 		return (0);
 	while (result < nb && root <= 46340)
 	{
