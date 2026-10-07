@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/06 15:51:35 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/07 14:32:59 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	main(int argc, char *argv[])
 	index_stack(&stack_a, size);
 	print_data(stack_a);
 	algorithm_selector(argv, stack_a, stack_b);
+	print_data(stack_a);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);
