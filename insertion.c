@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 11:58:57 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/07 14:29:36 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 13:57:37 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,10 @@ void	insertion_sort(t_stack **stack_a, t_stack **stack_b)
 	{
 		position = find_insertion_position(*stack_b, (*stack_a)->index);
 		rotate_to_position(stack_b, position);
-		pb(stack_a, stack_b);
+		pb(stack_b, stack_a);
 	}
 	position = find_max_position(*stack_b);
 	rotate_to_position(stack_b, position);
 	while (*stack_b)
-		pa(stack_a, stack_a);
+		pa(stack_a, stack_b);
 }

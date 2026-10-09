@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/07 14:32:59 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 14:14:39 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,23 @@ void	print_data(t_stack *stack)
 	ft_printf("stack %d: %s\n", i, stack);
 }
 
+void	adaptative_selection(void)
+{
+	float	disorder;
+
+}
+
 void	algorithm_selector(char *argv[], t_stack *stack_a, t_stack *stack_b)
 {
+
 	if (ft_strcmp(argv[1], "--simple") == 0)
 		insertion_sort(&stack_a, &stack_b);
-	if (ft_strcmp(argv[1], "--medium") == 0)
+	else if (ft_strcmp(argv[1], "--medium") == 0)
 		chunk_sort(&stack_a, &stack_b);
-	if (ft_strcmp(argv[1], "--complex") == 0)
+	else if (ft_strcmp(argv[1], "--complex") == 0)
 		radix_sort(&stack_a, &stack_b);
-	/*if (argv[1] == '--adaptative')*/
+	else if (ft_strcmp(argv[1], "--adaptative") == 0)
+		adaptative_selection();
 	else
 		error_exit(&stack_a);
 }

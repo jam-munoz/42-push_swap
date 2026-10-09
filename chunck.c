@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 15:35:53 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/06 21:35:42 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 13:55:46 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ void	chunk_to_postion(t_stack *stack_a, t_stack *stack_b)
 		if (stack_a->index >= (chunk * chunk_size)
 			&& stack_a->index < ((chunk + 1) * chunk_size))
 		{
-			pb(stack_b, stack_a);
+			pb(&stack_b, &stack_a);
 			counter++;
 		}
 		else
-			ra(stack_a);
+			ra(&stack_a);
 		if (counter == chunk_size)
 		{
 			chunk++;
@@ -76,11 +76,11 @@ void	chunk_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int	max;
 
-	max = get_stack_size(stack_b) - 1;
-	chunk_to_postion(stack_a, stack_b);
+	max = get_stack_size(*stack_b) - 1;
+	chunk_to_postion(*stack_a, *stack_b);
 	while (*stack_b)
 	{
-		rotate_to_position(stack_b, find_index_position(stack_b, max));
+		rotate_to_position(stack_b, find_index_position(*stack_b, max));
 		pa(stack_a, stack_b);
 		max--;
 	}
