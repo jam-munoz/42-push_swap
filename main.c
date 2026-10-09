@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/09 14:14:39 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 14:51:37 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,19 @@ void	adaptative_selection(void)
 
 }
 
-void	algorithm_selector(char *argv[], t_stack *stack_a, t_stack *stack_b)
+void	algorithm_selector(char *argv[], t_stack **stack_a, t_stack **stack_b)
 {
 
 	if (ft_strcmp(argv[1], "--simple") == 0)
-		insertion_sort(&stack_a, &stack_b);
+		insertion_sort(stack_a, stack_b);
 	else if (ft_strcmp(argv[1], "--medium") == 0)
-		chunk_sort(&stack_a, &stack_b);
+		chunk_sort(stack_a, stack_b);
 	else if (ft_strcmp(argv[1], "--complex") == 0)
-		radix_sort(&stack_a, &stack_b);
+		radix_sort(stack_a, stack_b);
 	else if (ft_strcmp(argv[1], "--adaptative") == 0)
 		adaptative_selection();
 	else
-		error_exit(&stack_a);
+		error_exit(stack_a);
 }
 
 int	main(int argc, char *argv[])
@@ -62,7 +62,7 @@ int	main(int argc, char *argv[])
 	size = parse_args(argc, argv, &stack_a);
 	index_stack(&stack_a, size);
 	print_data(stack_a);
-	algorithm_selector(argv, stack_a, stack_b);
+	algorithm_selector(argv, &stack_a, &stack_b);
 	print_data(stack_a);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);

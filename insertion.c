@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/05 11:58:57 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/09 14:35:55 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 14:44:49 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static int	find_insertion_position(t_stack *stack, int index)
 		next = stack->next;
 		if (!next)
 			next = first;
-		if (stack->index > index && index > next->index)
-			return (pos + 1);
-		if (stack->index < next->index
+		if (stack->index > next->index
 			&& (index > stack->index || index < next->index))
-			return (pos);
+			return (pos + 1);
+		if (stack->index < index && index < next->index)
+			return (pos + 1);
 		pos++;
 		stack = stack->next;
 	}
@@ -82,7 +82,11 @@ static void	rotate_to_position(t_stack **stack, int position)
 {
 	int	size;
 
+	if (!stack || !*stack)
+		return ;
 	size = get_stack_size(*stack);
+	if (size <= 1)
+		return ;
 	if (position <= size / 2)
 	{
 		while (position-- > 0)
@@ -100,6 +104,8 @@ void	insertion_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int	position;
 
+	if (!stack_a || !stack_b || !*stack_a)
+		return ;
 	pb(stack_a, stack_b);
 	while (*stack_a)
 	{
