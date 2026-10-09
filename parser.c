@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 17:02:25 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/02 18:04:39 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/06 15:37:12 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ int	parse_args(int argc, char *argv[], t_stack **stack) //un mini-split
 
 	tail = NULL;
 	count = 0;
-	i = 1;
+	i = 2;
 	while (i < argc)
 	{
 		count += parse_str(argv[i], stack, &tail);

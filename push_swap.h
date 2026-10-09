@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/02 18:54:09 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/06 21:28:13 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
@@ -21,7 +22,15 @@
 void	copy_data(char *str, t_stack **stack_a, int *arr, int *p);
 int		parse_args(int argc, char *argv[], t_stack **stack);
 void	index_stack(t_stack **stack, int size);
+int		get_stack_size(t_stack *stack);
+int		ft_sqrt(int nb);
 void	clear_stack(t_stack **stack);
 void	error_exit(t_stack **stack);
+
+int		ft_strcmp(const char *s1, const char *s2);
+
+void	insertion_sort(t_stack **stack_a, t_stack **stack_b);
+void	chunk_sort(t_stack **stack_a, t_stack **stack_b);
+void	radix_sort(t_stack **stack_a, t_stack **stack_b);
 
 #endif
