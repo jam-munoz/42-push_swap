@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/07 14:28:40 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 14:34:56 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 	write(STDOUT_FILENO, "pa\n", 3);
 }
 
-void	pb(t_stack **stack_b, t_stack **stack_a)
+void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_a, stack_b);
 	write(STDOUT_FILENO, "pb\n", 3);

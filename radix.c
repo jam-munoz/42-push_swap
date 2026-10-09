@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/06 14:46:13 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/06 15:52:23 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/09 14:35:44 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	radix_sort(t_stack **stack_a, t_stack **stack_b)
 			if ((((*stack_a)->index >> bit) & 1) == 1)
 				ra(stack_a);
 			else
-				pb(stack_b, stack_a);
+				pb(stack_a, stack_b);
 			i++;
 		}
 		while (*stack_b)
