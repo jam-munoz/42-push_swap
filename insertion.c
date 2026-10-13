@@ -50,10 +50,10 @@ static int	find_insertion_position(t_stack *stack, int index)
 		next = stack->next;
 		if (!next)
 			next = first;
-		if (stack->index > next->index
-			&& (index > stack->index || index < next->index))
+		if (stack->index < next->index
+			&& (index < stack->index || index > next->index))
 			return (pos + 1);
-		if (stack->index < index && index < next->index)
+		if (stack->index > index && index > next->index)
 			return (pos + 1);
 		pos++;
 		stack = stack->next;

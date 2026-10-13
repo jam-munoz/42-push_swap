@@ -61,19 +61,17 @@ int	ft_strcmp(const char *s1, const char *s2)
 
 int	ft_sqrt(int nb)
 {
-	int	root;
-	int	result;
+	long	x;
+	long	y;
 
-	root = 0;
-	result = 0;
-	if (nb <= 0)
+	if (nb < 1)
 		return (0);
-	while (result < nb && root <= 46340)
+	x = nb;
+	y = (x + 1) / 2;
+	while (y < x)
 	{
-		result = root * root;
-		if (result == nb)
-			return (root);
-		root++;
+		x = y;
+		y = (x + nb / x) / 2;
 	}
-	return (root - 1);
+	return ((int)x);
 }

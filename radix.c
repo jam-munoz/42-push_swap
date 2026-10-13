@@ -22,7 +22,6 @@ static int	get_max_bits(int index)
 		index >>= 1;
 		max_bits++;
 	}
-
 	return (max_bits);
 }
 

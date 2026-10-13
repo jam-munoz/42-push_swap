@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	chunk_to_postion(t_stack **stack_a, t_stack **stack_b)
+void	chunk_to_position(t_stack **stack_a, t_stack **stack_b)
 {
 	int	chunk;
 	int	chunk_size;
@@ -76,8 +76,8 @@ void	chunk_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	int	max;
 
+	chunk_to_position(stack_a, stack_b);
 	max = get_stack_size(*stack_b) - 1;
-	chunk_to_postion(stack_a, stack_b);
 	while (*stack_b)
 	{
 		rotate_to_position(stack_b, find_index_position(*stack_b, max));
