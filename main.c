@@ -27,11 +27,8 @@ void	print_data(t_stack *stack)
 	ft_printf("stack %d: %s\n", i, stack);
 }
 
-void	adaptive_selection(t_stack **stack_a, t_stack **stack_b)
+void	adaptive_selection(t_stack **stack_a, t_stack **stack_b, float disorder)
 {
-	float	disorder;
-
-	disorder = compute_disorder(*stack_a);
 	if (disorder < 0.2)
 		insertion_sort(stack_a, stack_b);
 	else if (disorder < 0.5)
@@ -40,7 +37,7 @@ void	adaptive_selection(t_stack **stack_a, t_stack **stack_b)
 		radix_sort(stack_a, stack_b);
 }
 
-void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b)
+void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b, float disorder)
 {
 	if (ft_strcmp(str, "--simple") == 0)
 		insertion_sort(stack_a, stack_b);
@@ -49,9 +46,20 @@ void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b)
 	else if (ft_strcmp(str, "--complex") == 0)
 		radix_sort(stack_a, stack_b);
 	else if (ft_strcmp(str, "--adaptive") == 0)
-		adaptive_selection(stack_a, stack_b);
+		adaptive_selection(stack_a, stack_b, disorder);
 	else
-		adaptive_selection(stack_a, stack_b);
+		adaptive_selection(stack_a, stack_b, disorder);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	while (stack && stack->next)
+	{
+		if (stack->index > stack->next->index)
+			return (0);
+		stack = stack->next;
+	}
+	return (1);
 }
 
 int	main(int argc, char *argv[])
@@ -59,14 +67,20 @@ int	main(int argc, char *argv[])
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	int		size;
+	long	inversions;
+	float	disorder;
 
 	if (argc < 2)
 		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
 	size = parse_args(argc, argv, &stack_a);
-	index_stack(&stack_a, size);
-	algorithm_selector(argv[1], &stack_a, &stack_b);
+	inversions = index_stack(&stack_a, size);
+	if (!is_sorted(stack_a))
+	{
+		disorder = compute_disorder(inversions, size);
+		algorithm_selector(argv[1], &stack_a, &stack_b, disorder);
+	}
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);

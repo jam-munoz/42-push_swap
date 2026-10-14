@@ -36,55 +36,63 @@ static int	assign_index(t_stack **arr, int size)
 	return (1);
 }
 
-static void	merge(t_stack **arr, t_stack **tmp, int left, int right)
+static long	merge(t_stack **arr, t_stack **tmp, int left, int right)
 {
 	int	mid;
 	int	i;
 	int	j;
-	int	k;
+	long	inversions;
 
 	mid = (left + right) / 2;
 	i = left;
 	j = mid + 1;
-	k = left;
+	inversions = 0;
 	while (i <= mid && j <= right)
 	{
 		if (arr[i]->number <= arr[j]->number)
-			tmp[k++] = arr[i++];
+			tmp[left++] = arr[i++];
 		else
-			tmp[k++] = arr[j++];
+		{
+			tmp[left++] = arr[j++];
+			inversions += mid - i + 1;
+		}
 	}
 	while (i <= mid)
-		tmp[k++] = arr[i++];
+		tmp[left++] = arr[i++];
 	while (j <= right)
-		tmp[k++] = arr[j++];
+		tmp[left++] = arr[j++];
+	return (inversions);
 }
 
-static void	merge_sort(t_stack **arr, t_stack **tmp, int left, int right)
+
+static long	merge_sort(t_stack **arr, t_stack **tmp, int left, int right)
 {
 	int	mid;
 	int	i;
+	long	inversions;
 
 	if (left >= right)
-		return ;
+		return (0);
 	mid = (left + right) / 2;
-	merge_sort(arr, tmp, left, mid);
-	merge_sort(arr, tmp, mid + 1, right);
-	merge(arr, tmp, left, right);
+	inversions = merge_sort(arr, tmp, left, mid);
+	inversions += merge_sort(arr, tmp, mid + 1, right);
+	inversions += merge(arr, tmp, left, right);
 	i = left;
 	while (i <= right)
 	{
 		arr[i] = tmp[i];
 		i++;
 	}
+	return (inversions);
 }
 
-void	index_stack(t_stack **stack, int size)
+long	index_stack(t_stack **stack, int size)
 {
 	t_stack	**arr;
 	t_stack	**tmp;
 	t_stack	*p;
 	int		i;
+	long	inversions;
 
 	arr = malloc(size * sizeof(t_stack *));
 	tmp = malloc(size * sizeof(t_stack *));
@@ -97,10 +105,11 @@ void	index_stack(t_stack **stack, int size)
 		arr[i++] = p;
 		p = p->next;
 	}
-	merge_sort(arr, tmp, 0, size - 1);
+	inversions = merge_sort(arr, tmp, 0, size - 1);
 	i = assign_index(arr, size);
 	free(arr);
 	free(tmp);
 	if (i == 0)
 		error_exit(stack);
+	return (inversions);
 }
