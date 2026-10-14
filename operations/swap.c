@@ -11,12 +11,12 @@
 /* ************************************************************************** */
 
 #include "operations.h"
-
+/* proteger casos borde: sobre un stack de
+ *0 o 1 elementos no debería hacer nada. */
 static void	swap(t_stack **stack)
 {
 	t_stack	*temp;
 
-	//proteger casos borde: sobre un stack de 0 o 1 elementos no debería hacer nada.
 	if (!stack || !*stack || !(*stack)->next)
 		return ;
 	temp = (*stack)->next;
