@@ -14,39 +14,44 @@
 
 void	print_data(t_stack *stack)
 {
-	int		i;
-	/*t_stack	*temp;*/
+	int	i;
 
 	i = 1;
 	while (stack != NULL)
 	{
-		ft_printf("stack %d:\t|-|\tnumber: %d\t|-|\tindex: %d\n", i, stack->number, stack->index);
-		/*temp = stack;*/
+		ft_printf("stack %d:\t|-|\tnumber: %d\t|-|\tindex:%d\n",
+			i, stack->number, stack->index);
 		stack = stack->next;
 		i++;
 	}
 	ft_printf("stack %d: %s\n", i, stack);
 }
 
-void	adaptive_selection(void)
+void	adaptive_selection(t_stack **stack_a, t_stack **stack_b)
 {
 	float	disorder;
 
+	disorder = compute_disorder(*stack_a);
+	if (disorder < 0.2)
+		insertion_sort(stack_a, stack_b);
+	else if (disorder < 0.5)
+		chunk_sort(stack_a, stack_b);
+	else
+		radix_sort(stack_a, stack_b);
 }
 
-void	algorithm_selector(char *argv[], t_stack **stack_a, t_stack **stack_b)
+void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b)
 {
-
-	if (ft_strcmp(argv[1], "--simple") == 0)
+	if (ft_strcmp(str, "--simple") == 0)
 		insertion_sort(stack_a, stack_b);
-	else if (ft_strcmp(argv[1], "--medium") == 0)
+	else if (ft_strcmp(str, "--medium") == 0)
 		chunk_sort(stack_a, stack_b);
-	else if (ft_strcmp(argv[1], "--complex") == 0)
+	else if (ft_strcmp(str, "--complex") == 0)
 		radix_sort(stack_a, stack_b);
-	else if (ft_strcmp(argv[1], "--adaptive") == 0)
-		adaptive_selection();
+	else if (ft_strcmp(str, "--adaptive") == 0)
+		adaptive_selection(stack_a, stack_b);
 	else
-		error_exit(stack_a);
+		adaptive_selection(stack_a, stack_b);
 }
 
 int	main(int argc, char *argv[])
@@ -61,9 +66,7 @@ int	main(int argc, char *argv[])
 	stack_b = NULL;
 	size = parse_args(argc, argv, &stack_a);
 	index_stack(&stack_a, size);
-	//print_data(stack_a);
-	algorithm_selector(argv, &stack_a, &stack_b);
-	//print_data(stack_a);
+	algorithm_selector(argv[1], &stack_a, &stack_b);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);

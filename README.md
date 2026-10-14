@@ -4,12 +4,12 @@
   - [x] errors
   - [x] validations
   - [x] make code tidier
-  - [] insertion
-  - [] radix
-  - [] chunk
-  - [] disorder metric
-  - [] adaptive
-  - [] debug & valgrind
+  - [x] insertion
+  - [x] radix
+  - [x] chunk
+  - [x] disorder metric
+  - [x] adaptive
+  - [+] debug & valgrind
 
 resources:
   - C Programming: A Modern Approach

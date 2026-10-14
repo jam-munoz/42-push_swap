@@ -13,7 +13,7 @@
 #include <limits.h>
 #include "push_swap.h"
 
-static int	parse_int(char **str, t_stack **stack) //es como el atoi
+static int	parse_int(char **str, t_stack **stack)
 {
 	int		sign;
 	long	sum;
@@ -74,7 +74,21 @@ static int	parse_str(char *str, t_stack **stack, t_stack **tail)
 	return (count);
 }
 
-int	parse_args(int argc, char *argv[], t_stack **stack) //un mini-split
+int	valid_header(char *str)
+{
+	if (ft_strcmp(str, "--simple") == 0)
+		return (1);
+	else if (ft_strcmp(str, "--medium") == 0)
+		return (1);
+	else if (ft_strcmp(str, "--complex") == 0)
+		return (1);
+	else if (ft_strcmp(str, "--adaptive") == 0)
+		return (1);
+	else
+		return (0);
+}
+
+int	parse_args(int argc, char *argv[], t_stack **stack)
 {
 	t_stack	*tail;
 	int		count;
@@ -82,7 +96,9 @@ int	parse_args(int argc, char *argv[], t_stack **stack) //un mini-split
 
 	tail = NULL;
 	count = 0;
-	i = 2;
+	i = 1;
+	if (valid_header(argv[1]))
+		i = 2;
 	while (i < argc)
 	{
 		count += parse_str(argv[i], stack, &tail);
