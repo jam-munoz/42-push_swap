@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/06 21:28:13 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/18 18:26:34 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ void	clear_stack(t_stack **stack);
 void	error_exit(t_stack **stack);
 int		ft_strcmp(const char *s1, const char *s2);
 float	compute_disorder(long inversions, int size);
+void	two_sort(t_stack **stack_a);
+void	three_sort(t_stack **stack_a, int i);
+void	four_sort(t_stack **stack_a, t_stack **stack_b);
+void	five_sort(t_stack **stack_a, t_stack **stack_b);
 void	insertion_sort(t_stack **stack_a, t_stack **stack_b);
 void	chunk_sort(t_stack **stack_a, t_stack **stack_b);
 void	radix_sort(t_stack **stack_a, t_stack **stack_b);

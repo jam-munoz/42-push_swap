@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/09 14:51:37 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/18 18:26:42 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,18 @@ void	print_data(t_stack *stack)
 
 void	adaptive_selection(t_stack **stack_a, t_stack **stack_b, float disorder)
 {
-	if (disorder < 0.2)
+	int	n;
+
+	n = get_stack_size(*stack_a);
+	if (n == 2)
+		two_sort(stack_a);
+	else if (n == 3)
+		three_sort(stack_a, 0);
+	else if (n == 4)
+		four_sort(stack_a, stack_b);
+	else if (n == 5)
+		five_sort(stack_a, stack_b);
+	else if (disorder < 0.2)
 		insertion_sort(stack_a, stack_b);
 	else if (disorder < 0.5)
 		chunk_sort(stack_a, stack_b);
