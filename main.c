@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdio.h>
 
 void	print_data(t_stack *stack)
 {
@@ -27,39 +28,79 @@ void	print_data(t_stack *stack)
 	ft_printf("stack %d: %s\n", i, stack);
 }
 
-void	adaptive_selection(t_stack **stack_a, t_stack **stack_b, float disorder)
+static const t_strategy_info	*g_two = &(t_strategy_info){"two_sort", "O(1)"};
+static const t_strategy_info	*g_three = &(t_strategy_info){"three_sort", "O(1)"};
+static const t_strategy_info	*g_four = &(t_strategy_info){"four_sort", "O(1)"};
+static const t_strategy_info	*g_five = &(t_strategy_info){"five_sort", "O(1)"};
+static const t_strategy_info	*g_insertion = &(t_strategy_info){"insertion_sort", "O(n^2)"};
+static const t_strategy_info	*g_chunk = &(t_strategy_info){"chunk_sort", "O(n^2)"};
+static const t_strategy_info	*g_radix = &(t_strategy_info){"radix_sort", "O(n log n)"};
+static const t_strategy_info	*g_noop = &(t_strategy_info){"no_sort (already sorted)", "O(1)"};
+
+static const t_strategy_info	*adaptive_selection(t_stack **stack_a,
+		t_stack **stack_b, float disorder)
 {
 	int	n;
 
 	n = get_stack_size(*stack_a);
 	if (n == 2)
+	{
 		two_sort(stack_a);
+		return (g_two);
+	}
 	else if (n == 3)
+	{
 		three_sort(stack_a, 0);
+		return (g_three);
+	}
 	else if (n == 4)
+	{
 		four_sort(stack_a, stack_b);
+		return (g_four);
+	}
 	else if (n == 5)
+	{
 		five_sort(stack_a, stack_b);
+		return (g_five);
+	}
 	else if (disorder < 0.2)
+	{
 		insertion_sort(stack_a, stack_b);
+		return (g_insertion);
+	}
 	else if (disorder < 0.5)
+	{
 		chunk_sort(stack_a, stack_b);
+		return (g_chunk);
+	}
 	else
+	{
 		radix_sort(stack_a, stack_b);
+		return (g_radix);
+	}
 }
 
-void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b, float disorder)
+const t_strategy_info	*algorithm_selector(char *str, t_stack **stack_a,
+		t_stack **stack_b, float disorder)
 {
 	if (ft_strcmp(str, "--simple") == 0)
+	{
 		insertion_sort(stack_a, stack_b);
+		return (g_insertion);
+	}
 	else if (ft_strcmp(str, "--medium") == 0)
+	{
 		chunk_sort(stack_a, stack_b);
+		return (g_chunk);
+	}
 	else if (ft_strcmp(str, "--complex") == 0)
+	{
 		radix_sort(stack_a, stack_b);
+		return (g_radix);
+	}
 	else if (ft_strcmp(str, "--adaptive") == 0)
-		adaptive_selection(stack_a, stack_b, disorder);
-	else
-		adaptive_selection(stack_a, stack_b, disorder);
+		return (adaptive_selection(stack_a, stack_b, disorder));
+	return (adaptive_selection(stack_a, stack_b, disorder));
 }
 
 int	is_sorted(t_stack *stack)
@@ -73,10 +114,30 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
+static void	print_benchmark(float disorder, const t_strategy_info *strategy)
+{
+	static const char	*op_names[OP_COUNT] = {"sa", "sb", "ss", "pa", "pb",
+		"ra", "rb", "rr", "rra", "rrb", "rrr"};
+	int					i;
+
+	dprintf(STDERR_FILENO, "Disorder: %.2f%%\n", disorder * 100.0f);
+	dprintf(STDERR_FILENO, "Strategy: %s (%s)\n", strategy->name,
+		strategy->complexity);
+	dprintf(STDERR_FILENO, "Total operations: %ld\n", bench_get_total_ops());
+	i = 0;
+	while (i < OP_COUNT)
+	{
+		dprintf(STDERR_FILENO, "%s: %ld\n", op_names[i], bench_get_op_count(i));
+		i++;
+	}
+}
+
 int	main(int argc, char *argv[])
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	t_run_config	config;
+	const t_strategy_info	*strategy;
 	int		size;
 	long	inversions;
 	float	disorder;
@@ -85,13 +146,18 @@ int	main(int argc, char *argv[])
 		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
-	size = parse_args(argc, argv, &stack_a);
+	bench_reset();
+	size = parse_args(argc, argv, &stack_a, &config);
+	bench_enable(config.bench);
 	inversions = index_stack(&stack_a, size);
+	disorder = compute_disorder(inversions, size);
+	strategy = g_noop;
 	if (!is_sorted(stack_a))
 	{
-		disorder = compute_disorder(inversions, size);
-		algorithm_selector(argv[1], &stack_a, &stack_b, disorder);
+		strategy = algorithm_selector(config.mode, &stack_a, &stack_b, disorder);
 	}
+	if (config.bench)
+		print_benchmark(disorder, strategy);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);
