@@ -74,7 +74,7 @@ static int	parse_str(char *str, t_stack **stack, t_stack **tail)
 	return (count);
 }
 
-int	valid_header(char *str)
+static int	is_mode_flag(char *str)
 {
 	if (ft_strcmp(str, "--simple") == 0)
 		return (1);
@@ -88,20 +88,48 @@ int	valid_header(char *str)
 		return (0);
 }
 
-int	parse_args(int argc, char *argv[], t_stack **stack)
+static int	is_bench_flag(char *str)
+{
+	return (ft_strcmp(str, "--bench") == 0);
+}
+
+int	parse_args(int argc, char *argv[], t_stack **stack, t_run_config *config)
 {
 	t_stack	*tail;
 	int		count;
 	int		i;
+	int		numbers_found;
+	int		mode_found;
 
 	tail = NULL;
 	count = 0;
 	i = 1;
-	if (valid_header(argv[1]))
-		i = 2;
+	numbers_found = 0;
+	mode_found = 0;
+	config->mode = "--adaptive";
+	config->bench = 0;
 	while (i < argc)
 	{
-		count += parse_str(argv[i], stack, &tail);
+		if (!numbers_found && is_mode_flag(argv[i]))
+		{
+			if (mode_found)
+				error_exit(stack);
+			config->mode = argv[i];
+			mode_found = 1;
+		}
+		else if (!numbers_found && is_bench_flag(argv[i]))
+		{
+			if (config->bench)
+				error_exit(stack);
+			config->bench = 1;
+		}
+		else
+		{
+			if (argv[i][0] == '-' && argv[i][1] == '-')
+				error_exit(stack);
+			numbers_found = 1;
+			count += parse_str(argv[i], stack, &tail);
+		}
 		i++;
 	}
 	if (count == 0)
