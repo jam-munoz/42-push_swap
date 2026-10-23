@@ -53,7 +53,6 @@ void	three_sort(t_stack **stack_a, int i)
 
 	a = (*stack_a)->index - i;
 	b = (*stack_a)->next->index - i;
-
 	if (a == 0 && b == 1)
 		return ;
 	else if (a == 0 && b == 2)
@@ -74,7 +73,6 @@ void	three_sort(t_stack **stack_a, int i)
 	}
 }
 
-
 void	four_sort(t_stack **stack_a, t_stack **stack_b)
 {
 	rotate_to_position(stack_a, 0);
@@ -92,5 +90,4 @@ void	five_sort(t_stack **stack_a, t_stack **stack_b)
 	three_sort(stack_a, 2);
 	pa(stack_a, stack_b);
 	pa(stack_a, stack_b);
-
 }

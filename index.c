@@ -38,9 +38,9 @@ static int	assign_index(t_stack **arr, int size)
 
 static long	merge(t_stack **arr, t_stack **tmp, int left, int right)
 {
-	int	mid;
-	int	i;
-	int	j;
+	int		mid;
+	int		i;
+	int		j;
 	long	inversions;
 
 	mid = (left + right) / 2;
@@ -64,11 +64,10 @@ static long	merge(t_stack **arr, t_stack **tmp, int left, int right)
 	return (inversions);
 }
 
-
 static long	merge_sort(t_stack **arr, t_stack **tmp, int left, int right)
 {
-	int	mid;
-	int	i;
+	int		mid;
+	int		i;
 	long	inversions;
 
 	if (left >= right)
