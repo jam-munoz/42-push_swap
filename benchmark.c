@@ -12,44 +12,47 @@
 
 #include "push_swap.h"
 
-static int	g_bench_enabled = 0;
-static long	g_total_ops = 0;
-static long	g_op_counts[OP_COUNT];
+t_bench_state	*bench_state(void);
 
 void	bench_reset(void)
 {
-	int	i;
+	t_bench_state	*state;
+	int				i;
 
+	state = bench_state();
 	i = 0;
-	g_total_ops = 0;
+	state->total_ops = 0;
 	while (i < OP_COUNT)
 	{
-		g_op_counts[i] = 0;
+		state->op_counts[i] = 0;
 		i++;
 	}
 }
 
 void	bench_enable(int enabled)
 {
-	g_bench_enabled = enabled;
+	bench_state()->enabled = enabled;
 }
 
 void	bench_record_operation(int operation)
 {
-	if (!g_bench_enabled || operation < 0 || operation >= OP_COUNT)
+	t_bench_state	*state;
+
+	state = bench_state();
+	if (!state->enabled || operation < 0 || operation >= OP_COUNT)
 		return ;
-	g_total_ops++;
-	g_op_counts[operation]++;
+	state->total_ops++;
+	state->op_counts[operation]++;
 }
 
 long	bench_get_total_ops(void)
 {
-	return (g_total_ops);
+	return (bench_state()->total_ops);
 }
 
 long	bench_get_op_count(int operation)
 {
 	if (operation < 0 || operation >= OP_COUNT)
 		return (0);
-	return (g_op_counts[operation]);
+	return (bench_state()->op_counts[operation]);
 }

@@ -15,7 +15,8 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -g
 
-SOURCE_FILES := $(wildcard *.c) $(wildcard operations/*.c) $(wildcard ft_printf/*.c)
+SOURCE_FILES := $(filter-out checker_%.c,$(wildcard *.c)) \
+	$(wildcard operations/*.c) $(wildcard ft_printf/*.c)
 
 OBJECTS = ${SOURCE_FILES:.c=.o}
 
