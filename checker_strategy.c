@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   checker_strategy.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/23 20:00:00 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/24 08:06:10 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker_bonus.h"
-
-void	print_data(t_stack *stack)
-{
-	int	i;
-
-	i = 1;
-	while (stack != NULL)
-	{
-		ft_printf("stack %d:\t|-|\tnumber: %d\t|-|\tindex:%d\n",
-			i, stack->number, stack->index);
-		stack = stack->next;
-		i++;
-	}
-	ft_printf("stack %d: %s\n", i, stack);
-}
 
 void	adaptive_selection(t_stack **stack_a, t_stack **stack_b)
 {

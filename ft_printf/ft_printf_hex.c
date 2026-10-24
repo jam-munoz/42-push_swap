@@ -44,7 +44,6 @@ void	ft_print_hex(t_printf *pf)
 	if (pf->buf_len + digits > BUF_SIZE)
 		ft_print_buf(pf);
 	pf->buf_len += digits;
-	pf->count += digits;
 	digits = pf->buf_len;
 	while (n > 0)
 	{
@@ -69,7 +68,6 @@ void	ft_print_ptr(t_printf *pf)
 	pf->buf[pf->buf_len] = '0';
 	pf->buf[pf->buf_len + 1] = 'x';
 	pf->buf_len += digits;
-	pf->count += digits;
 	digits = pf->buf_len;
 	while (n > 0)
 	{

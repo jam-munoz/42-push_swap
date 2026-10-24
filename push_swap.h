@@ -47,8 +47,7 @@ typedef struct s_strategy_request
 	t_stack			**stack_b;
 	float			disorder;
 	t_strategy_info	*strategy;
-}	t_strategy_request;
-typedef t_strategy_request	t_request;
+}	t_request;
 
 typedef enum e_operation
 {
@@ -92,7 +91,7 @@ void	five_sort(t_stack **stack_a, t_stack **stack_b);
 void	insertion_sort(t_stack **stack_a, t_stack **stack_b);
 void	chunk_sort(t_stack **stack_a, t_stack **stack_b);
 void	radix_sort(t_stack **stack_a, t_stack **stack_b);
-void	select_strategy(t_strategy_request *request);
+void	select_strategy(t_request *request);
 void	bench_reset(void);
 void	bench_enable(int enabled);
 void	bench_record_operation(int operation);

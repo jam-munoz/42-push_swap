@@ -6,7 +6,7 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/03 09:35:48 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/09/02 12:43:51 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/24 08:27:30 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ int	ft_print_zero(unsigned long n, t_printf *pf)
 		if (*pf->format != 'p')
 		{
 			pf->buf[pf->buf_len++] = '0';
-			pf->count++;
 		}
 		else
 		{
@@ -53,7 +52,6 @@ int	ft_print_zero(unsigned long n, t_printf *pf)
 			pf->buf[pf->buf_len++] = 'i';
 			pf->buf[pf->buf_len++] = 'l';
 			pf->buf[pf->buf_len++] = ')';
-			pf->count += 5;
 		}
 		return (1);
 	}
@@ -72,13 +70,11 @@ void	ft_print_int(t_printf *pf)
 	{
 		n = -n;
 		pf->buf[pf->buf_len++] = '-';
-		pf->count++;
 	}
 	digits = ft_digit_count(n);
 	if (pf->buf_len + digits > BUF_SIZE)
 		ft_print_buf(pf);
 	pf->buf_len += digits;
-	pf->count += digits;
 	digits = pf->buf_len;
 	while (n > 0)
 	{
@@ -99,7 +95,6 @@ void	ft_print_uint(t_printf *pf)
 	if (pf->buf_len + digits > BUF_SIZE)
 		ft_print_buf(pf);
 	pf->buf_len += digits;
-	pf->count += digits;
 	digits = pf->buf_len;
 	while (n > 0)
 	{

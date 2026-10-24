@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/23 20:00:00 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/24 08:50:19 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static int	is_sorted(t_stack *stack)
 {
@@ -30,16 +29,24 @@ static void	print_benchmark(float disorder, t_strategy_info strategy)
 		"ra", "rb", "rr", "rra", "rrb", "rrr"};
 	int					i;
 
-	dprintf(STDERR_FILENO, "Disorder: %.2f%%\n", disorder * 100.0f);
-	dprintf(STDERR_FILENO, "Strategy: %s (%s)\n", strategy.name,
+	ft_printf(STDERR_FILENO, "[bench] disorder: %f%%\n", disorder * 100.0f);
+	ft_printf(STDERR_FILENO, "[bench] strategy: %s / (%s)\n", strategy.name,
 		strategy.complexity);
-	dprintf(STDERR_FILENO, "Total operations: %ld\n", bench_get_total_ops());
+	ft_printf(STDERR_FILENO, "[bench] total_ops: %d\n", bench_get_total_ops());
 	i = 0;
-	while (i < OP_COUNT)
+	ft_printf(STDERR_FILENO, "[bench] ");
+	while (i < OP_COUNT / 2)
 	{
-		dprintf(STDERR_FILENO, "%s: %ld\n", op_names[i], bench_get_op_count(i));
+		ft_printf(STDERR_FILENO, "%s: %d\t", op_names[i], bench_get_op_count(i));
 		i++;
 	}
+	ft_printf(STDERR_FILENO, "\n[bench] ");
+	while (i < OP_COUNT)
+	{
+		ft_printf(STDERR_FILENO, "%s: %d\t", op_names[i], bench_get_op_count(i));
+		i++;
+	}
+	ft_printf(STDERR_FILENO, "\n");
 }
 
 static void	run_sort(t_stack **stack_a, t_stack **stack_b,

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   benchmark.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/23 19:03:00 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/23 19:03:00 by divillan         ###   ########.fr       */
+/*   Created: 2026/10/23 19:03:00 by joamunoz          #+#    #+#             */
+/*   Updated: 2026/10/24 08:05:06 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
