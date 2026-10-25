@@ -6,11 +6,27 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 07:38:57 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 08:00:06 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "b_checker_bonus.h"
+
+void	check_reverse_instruction(char *instruction, t_stack **stack_a,
+		t_stack **stack_b)
+{
+	if (ft_strcmp("rra\n", instruction) == 0)
+		rra(stack_a);
+	else if (ft_strcmp("rrb\n", instruction) == 0)
+		rrb(stack_b);
+	else if (ft_strcmp("rrr\n", instruction) == 0)
+		rrr(stack_a, stack_b);
+	else
+	{
+		clear_stack(stack_b);
+		error_exit(stack_a);
+	}
+}
 
 void	check_instructions(char *instruction, t_stack **stack_a,
 		t_stack **stack_b)
