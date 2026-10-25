@@ -21,5 +21,7 @@ void	check_instructions(char *instruction, t_stack **stack_a,
 void	check_reverse_instruction(char *instruction, t_stack **stack_a,
 			t_stack **stack_b);
 void	check_stack(t_stack *stack_a, t_stack *stack_b);
+int		checker_mute_operations(void);
+void	checker_restore_output(int saved_stdout);
 
 #endif

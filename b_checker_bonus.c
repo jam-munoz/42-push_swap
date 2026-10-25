@@ -94,6 +94,7 @@ int	main(int argc, char *argv[])
 	t_stack	*stack_b;
 	char	*instruction;
 	int		size;
+	int		saved_stdout;
 
 	if (argc < 2)
 		return (0);
@@ -102,7 +103,12 @@ int	main(int argc, char *argv[])
 	reject_flags(argc, argv, &stack_a);
 	size = parse_args(argc, argv, &stack_a, &(t_run_config){0});
 	index_stack(&stack_a, size);
-	set_operation_output(0);
+	saved_stdout = checker_mute_operations();
+	if (saved_stdout < 0)
+	{
+		clear_stack(&stack_b);
+		error_exit(&stack_a);
+	}
 	while (1)
 	{
 		instruction = get_next_line(STDIN_FILENO);
@@ -111,6 +117,7 @@ int	main(int argc, char *argv[])
 		check_instructions(instruction, &stack_a, &stack_b);
 		free(instruction);
 	}
+	checker_restore_output(saved_stdout);
 	check_stack(stack_a, stack_b);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);

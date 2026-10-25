@@ -44,6 +44,7 @@ SOURCE_FILES = \
 
 BONUS_SOURCE_FILES = \
 	b_checker_bonus.c \
+	b_checker_output_bonus.c \
 	ft_get_next_line.c \
 	ft_get_next_line_utils.c \
 	$(COMMON_SOURCE_FILES)

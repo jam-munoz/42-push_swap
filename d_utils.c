@@ -12,16 +12,14 @@
 
 #include "d_push_swap.h"
 
-static int	g_operation_output = 1;
-
 void	set_operation_output(int enabled)
 {
-	g_operation_output = enabled;
+	(void)enabled;
 }
 
 int	operation_output_enabled(void)
 {
-	return (g_operation_output);
+	return (1);
 }
 
 void	clear_stack(t_stack **stack)
