@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   o_push.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/09 14:34:56 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:04:09 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
-#include "../push_swap.h"
+#include "o_operations.h"
+#include "d_push_swap.h"
 
 static void	push(t_stack **stack_1, t_stack **stack_2)
 {

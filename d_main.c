@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   d_main.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/24 08:50:19 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:09:47 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 static int	is_sorted(t_stack *stack)
 {
@@ -37,13 +37,13 @@ static void	print_benchmark(float disorder, t_strategy_info strategy)
 	ft_printf(STDERR_FILENO, "[bench] ");
 	while (i < OP_COUNT / 2)
 	{
-		ft_printf(STDERR_FILENO, "%s: %d\t", op_names[i], bench_get_op_count(i));
+		ft_printf(2, "%s: %d\t", op_names[i], bench_get_op_count(i));
 		i++;
 	}
 	ft_printf(STDERR_FILENO, "\n[bench] ");
 	while (i < OP_COUNT)
 	{
-		ft_printf(STDERR_FILENO, "%s: %d\t", op_names[i], bench_get_op_count(i));
+		ft_printf(2, "%s: %d\t", op_names[i], bench_get_op_count(i));
 		i++;
 	}
 	ft_printf(STDERR_FILENO, "\n");

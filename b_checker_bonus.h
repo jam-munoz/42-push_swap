@@ -1,29 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   flags.c                                            :+:      :+:    :+:   */
+/*   b_checker_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:00:00 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/23 20:00:00 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:56:50 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef B_CHECKER_BONUS_H
+# define B_CHECKER_BONUS_H
 
-int	is_mode_flag(char *str)
-{
-	if (ft_strcmp(str, "--simple") == 0)
-		return (1);
-	if (ft_strcmp(str, "--medium") == 0)
-		return (1);
-	if (ft_strcmp(str, "--complex") == 0)
-		return (1);
-	return (ft_strcmp(str, "--adaptive") == 0);
-}
+# include "d_push_swap.h"
 
-int	is_bench_flag(char *str)
-{
-	return (ft_strcmp(str, "--bench") == 0);
-}
+void	check_instructions(char *instruction, t_stack **stack_a,
+			t_stack **stack_b);
+void	check_reverse_instruction(char *instruction, t_stack **stack_a,
+			t_stack **stack_b);
+void	check_stack(t_stack *stack_a);
+void	adaptive_selection(t_stack **stack_a, t_stack **stack_b);
+void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b);
+
+#endif

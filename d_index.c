@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 static void	alloc_error_exit(t_stack **stack, t_stack **arr, t_stack **tmp)
 {

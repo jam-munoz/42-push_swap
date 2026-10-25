@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 static int	get_max_bits(int index)
 {

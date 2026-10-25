@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 t_bench_state	*bench_state(void);
 

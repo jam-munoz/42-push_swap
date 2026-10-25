@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   swap.c                                             :+:      :+:    :+:   */
+/*   o_swap.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/04 16:01:39 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:04:19 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "operations.h"
-#include "../push_swap.h"
-/* proteger casos borde: sobre un stack de
- *0 o 1 elementos no debería hacer nada. */
+#include "o_operations.h"
+#include "d_push_swap.h"
+
 static void	swap(t_stack **stack)
 {
 	t_stack	*temp;

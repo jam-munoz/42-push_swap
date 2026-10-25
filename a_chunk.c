@@ -1,18 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   chunk.c                                            :+:      :+:    :+:   */
+/*   a_chunk.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/04 15:35:53 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/09 15:00:38 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:06:24 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 static int	find_index_position(t_stack *stack, int index)
 {

@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   d_push_swap.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/18 18:26:34 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:05:23 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef D_PUSH_SWAP_H
+# define D_PUSH_SWAP_H
 
 # include <stdlib.h>
 # include <unistd.h>
-# include "./ft_printf/ft_printf.h"
-# include "./operations/operations.h"
+# include "ft_printf.h"
+# include "o_operations.h"
 
 typedef struct s_run_config
 {

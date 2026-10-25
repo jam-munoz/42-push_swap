@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker_bonus.c                                    :+:      :+:    :+:   */
+/*   b_checker_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/24 08:05:53 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 07:38:57 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "b_checker_bonus.h"
 
 void	check_instructions(char *instruction, t_stack **stack_a,
 		t_stack **stack_b)
@@ -50,4 +50,23 @@ void	check_stack(t_stack *stack_a)
 		}
 	}
 	write(STDOUT_FILENO, "OK\n", 3);
+}
+
+int	main(int argc, char *argv[])
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	int		size;
+
+	if (argc < 2)
+		return (0);
+	stack_a = NULL;
+	stack_b = NULL;
+	size = parse_args(argc, argv, &stack_a, &(t_run_config){0});
+	index_stack(&stack_a, size);
+	algorithm_selector(argv[1], &stack_a, &stack_b);
+	check_stack(stack_a);
+	clear_stack(&stack_a);
+	clear_stack(&stack_b);
+	return (0);
 }

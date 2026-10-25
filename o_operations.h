@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   operations.h                                       :+:      :+:    :+:   */
+/*   o_operations.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
+/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/18 18:14:57 by divillan         ###   ########.fr       */
+/*   Updated: 2026/10/24 23:13:38 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef OPERATIONS_H
-# define OPERATIONS_H
+#ifndef O_OPERATIONS_H
+# define O_OPERATIONS_H
 
 # include <unistd.h>
 

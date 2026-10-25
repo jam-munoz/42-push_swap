@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "checker_bonus.h"
+#include "b_checker_bonus.h"
 
 void	adaptive_selection(t_stack **stack_a, t_stack **stack_b)
 {

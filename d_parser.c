@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <limits.h>
-#include "push_swap.h"
+#include "d_push_swap.h"
 
 static int	parse_int(char **str, t_stack **stack)
 {
