@@ -16,10 +16,36 @@ CC = cc
 RM = rm -f
 CFLAGS = -Wall -Wextra -g
 
-SOURCE_FILES := $(filter-out b_checker_%.c,$(wildcard *.c)) \
-	$(wildcard operations/*.c) $(wildcard ft_printf/*.c)
+COMMON_SOURCE_FILES = \
+	a_chunk.c \
+	a_disorder.c \
+	a_flags.c \
+	a_insertion.c \
+	a_radix.c \
+	a_sort.c \
+	a_strategy.c \
+	d_index.c \
+	d_parser.c \
+	d_utils.c \
+	ft_printf.c \
+	ft_printf_dec.c \
+	ft_printf_float.c \
+	ft_printf_hex.c \
+	m_benchmark.c \
+	m_benchmark_state.c \
+	o_push.c \
+	o_rev_rotate.c \
+	o_rotate.c \
+	o_swap.c
 
-BONUS_SOURCE_FILES := $(wildcard b_*.c)
+SOURCE_FILES = \
+	d_main.c \
+	$(COMMON_SOURCE_FILES)
+
+BONUS_SOURCE_FILES = \
+	b_checker_bonus.c \
+	b_checker_strategy_bonus.c \
+	$(COMMON_SOURCE_FILES)
 
 OBJECTS = ${SOURCE_FILES:.c=.o}
 
