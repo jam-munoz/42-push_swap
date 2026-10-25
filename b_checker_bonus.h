@@ -14,13 +14,12 @@
 # define B_CHECKER_BONUS_H
 
 # include "d_push_swap.h"
+# include "ft_get_next_line.h"
 
 void	check_instructions(char *instruction, t_stack **stack_a,
 			t_stack **stack_b);
 void	check_reverse_instruction(char *instruction, t_stack **stack_a,
 			t_stack **stack_b);
-void	check_stack(t_stack *stack_a);
-void	adaptive_selection(t_stack **stack_a, t_stack **stack_b);
-void	algorithm_selector(char *str, t_stack **stack_a, t_stack **stack_b);
+void	check_stack(t_stack *stack_a, t_stack *stack_b);
 
 #endif

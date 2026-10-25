@@ -33,14 +33,16 @@ void	rra(t_stack **stack_a)
 {
 	rev_rotate(stack_a);
 	bench_record_operation(OP_RRA);
-	write(STDOUT_FILENO, "rra\n", 4);
+	if (operation_output_enabled())
+		write(STDOUT_FILENO, "rra\n", 4);
 }
 
 void	rrb(t_stack **stack_b)
 {
 	rev_rotate(stack_b);
 	bench_record_operation(OP_RRB);
-	write(STDOUT_FILENO, "rrb\n", 4);
+	if (operation_output_enabled())
+		write(STDOUT_FILENO, "rrb\n", 4);
 }
 
 void	rrr(t_stack **stack_a, t_stack **stack_b)
@@ -48,5 +50,6 @@ void	rrr(t_stack **stack_a, t_stack **stack_b)
 	rev_rotate(stack_a);
 	rev_rotate(stack_b);
 	bench_record_operation(OP_RRR);
-	write(STDOUT_FILENO, "rrr\n", 4);
+	if (operation_output_enabled())
+		write(STDOUT_FILENO, "rrr\n", 4);
 }

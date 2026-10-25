@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "ft_get_next_line.h"
 
 static char	*get_stash(int fd, char *stash)
 {

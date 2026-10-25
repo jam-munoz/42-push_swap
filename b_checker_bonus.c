@@ -12,6 +12,27 @@
 
 #include "b_checker_bonus.h"
 
+static void	checker_error(char *instruction, t_stack **stack_a,
+		t_stack **stack_b)
+{
+	free(instruction);
+	clear_stack(stack_b);
+	error_exit(stack_a);
+}
+
+static void	reject_flags(int argc, char **argv, t_stack **stack_a)
+{
+	int	i;
+
+	i = 1;
+	while (i < argc)
+	{
+		if (argv[i][0] == '-' && argv[i][1] == '-')
+			error_exit(stack_a);
+		i++;
+	}
+}
+
 void	check_reverse_instruction(char *instruction, t_stack **stack_a,
 		t_stack **stack_b)
 {
@@ -22,10 +43,7 @@ void	check_reverse_instruction(char *instruction, t_stack **stack_a,
 	else if (ft_strcmp("rrr\n", instruction) == 0)
 		rrr(stack_a, stack_b);
 	else
-	{
-		clear_stack(stack_b);
-		error_exit(stack_a);
-	}
+		checker_error(instruction, stack_a, stack_b);
 }
 
 void	check_instructions(char *instruction, t_stack **stack_a,
@@ -51,37 +69,49 @@ void	check_instructions(char *instruction, t_stack **stack_a,
 		check_reverse_instruction(instruction, stack_a, stack_b);
 }
 
-void	check_stack(t_stack *stack_a)
+static int	is_sorted(t_stack *stack_a)
 {
-	t_stack	*prev;
-
-	while (stack_a->next != NULL)
+	while (stack_a && stack_a->next)
 	{
-		prev = stack_a;
+		if (stack_a->number > stack_a->next->number)
+			return (0);
 		stack_a = stack_a->next;
-		if (prev->number > stack_a->number)
-		{
-			write(STDOUT_FILENO, "KO\n", 3);
-			return ;
-		}
 	}
-	write(STDOUT_FILENO, "OK\n", 3);
+	return (1);
+}
+
+void	check_stack(t_stack *stack_a, t_stack *stack_b)
+{
+	if (stack_b == NULL && is_sorted(stack_a))
+		write(STDOUT_FILENO, "OK\n", 3);
+	else
+		write(STDOUT_FILENO, "KO\n", 3);
 }
 
 int	main(int argc, char *argv[])
 {
 	t_stack	*stack_a;
 	t_stack	*stack_b;
+	char	*instruction;
 	int		size;
 
 	if (argc < 2)
 		return (0);
 	stack_a = NULL;
 	stack_b = NULL;
+	reject_flags(argc, argv, &stack_a);
 	size = parse_args(argc, argv, &stack_a, &(t_run_config){0});
 	index_stack(&stack_a, size);
-	algorithm_selector(argv[1], &stack_a, &stack_b);
-	check_stack(stack_a);
+	set_operation_output(0);
+	while (1)
+	{
+		instruction = get_next_line(STDIN_FILENO);
+		if (instruction == NULL)
+			break ;
+		check_instructions(instruction, &stack_a, &stack_b);
+		free(instruction);
+	}
+	check_stack(stack_a, stack_b);
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);

@@ -83,6 +83,8 @@ int		ft_sqrt(int nb);
 void	clear_stack(t_stack **stack);
 void	error_exit(t_stack **stack);
 int		ft_strcmp(const char *s1, const char *s2);
+void	set_operation_output(int enabled);
+int		operation_output_enabled(void);
 float	compute_disorder(long inversions, int size);
 void	two_sort(t_stack **stack_a);
 void	three_sort(t_stack **stack_a, int i);

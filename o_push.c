@@ -29,12 +29,14 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
 	bench_record_operation(OP_PA);
-	write(STDOUT_FILENO, "pa\n", 3);
+	if (operation_output_enabled())
+		write(STDOUT_FILENO, "pa\n", 3);
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_a, stack_b);
 	bench_record_operation(OP_PB);
-	write(STDOUT_FILENO, "pb\n", 3);
+	if (operation_output_enabled())
+		write(STDOUT_FILENO, "pb\n", 3);
 }
