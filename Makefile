@@ -6,7 +6,7 @@
 #    By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#              #
-#    Updated: 2026/10/25 07:49:56 by joamunoz         ###   ########.fr        #
+#    Updated: 2026/10/25 17:28:40 by joamunoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,6 @@ CFLAGS = -Wall -Wextra -g
 
 COMMON_SOURCE_FILES = \
 	a_chunk.c \
-	a_disorder.c \
-	a_flags.c \
 	a_insertion.c \
 	a_radix.c \
 	a_sort.c \
@@ -44,10 +42,13 @@ SOURCE_FILES = \
 
 BONUS_SOURCE_FILES = \
 	b_checker_bonus.c \
-	b_checker_strategy_bonus.c \
+	b_checker_utils_bonus.c \
+	ft_get_next_line.c \
+	ft_get_next_line_utils.c \
 	$(COMMON_SOURCE_FILES)
 
 OBJECTS = ${SOURCE_FILES:.c=.o}
+BONUS_OBJECTS = ${BONUS_SOURCE_FILES:.c=.o}
 
 %.o: %.c d_push_swap.h o_operations.h ft_printf.h b_checker_bonus.h
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
@@ -57,14 +58,14 @@ ${NAME}: ${OBJECTS}
 
 all: ${NAME}
 
-bonus: ${BONUS_SOURCE_FILES}
-		$(CC) $(CFLAGS) $(BONUS_SOURCE_FILES) -o $(BONUS_NAME)
+bonus: ${BONUS_OBJECTS}
+		$(CC) $(CFLAGS) $(BONUS_OBJECTS) -o $(BONUS_NAME)
 
 clean:
-	${RM} ${OBJECTS}
+	${RM} ${OBJECTS} $(BONUS_OBJECTS)
 
 fclean: clean
-	${RM} ${NAME}
+	${RM} ${NAME} ${BONUS_NAME}
 
 re: fclean all
 

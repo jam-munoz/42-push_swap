@@ -6,11 +6,21 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 07:09:47 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 17:19:42 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "d_push_swap.h"
+
+float	compute_disorder(long inversions, int size)
+{
+	long	max_inversions;
+
+	max_inversions = (long)size * (size - 1) / 2;
+	if (max_inversions == 0)
+		return (0.0f);
+	return ((float)inversions / max_inversions);
+}
 
 static int	is_sorted(t_stack *stack)
 {

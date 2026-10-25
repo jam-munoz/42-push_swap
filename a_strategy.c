@@ -6,7 +6,7 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:00:00 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 07:08:17 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 17:30:05 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ static t_strategy_info	make_strategy(const char *name, const char *complexity)
 	strategy.name = name;
 	strategy.complexity = complexity;
 	return (strategy);
+}
+
+int	is_mode_flag(char *str)
+{
+	if (ft_strcmp(str, "--simple") == 0)
+		return (1);
+	if (ft_strcmp(str, "--medium") == 0)
+		return (1);
+	if (ft_strcmp(str, "--complex") == 0)
+		return (1);
+	return (ft_strcmp(str, "--adaptive") == 0);
 }
 
 static t_strategy_info	select_adaptive(t_stack **stack_a, t_stack **stack_b,

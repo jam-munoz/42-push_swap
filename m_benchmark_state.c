@@ -1,16 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   benchmark_state.c                                  :+:      :+:    :+:   */
+/*   m_benchmark_state.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:00:00 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/24 08:05:17 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/25 17:30:14 by joamunoz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "d_push_swap.h"
+
+int	is_bench_flag(char *str)
+{
+	return (ft_strcmp(str, "--bench") == 0);
+}
 
 t_bench_state	*bench_state(void)
 {
