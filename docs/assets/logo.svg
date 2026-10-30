@@ -1,0 +1,142 @@
+
+
+<svg	xmlns="http://www.w3.org/2000/svg"
+		width="512"
+		height="512"
+		viewBox="0 0 1024 1024">
+
+	<rect width="1024" height="1024" fill="#080D16"/>
+
+	<defs>
+		<linearGradient id="cyanTop" x1="0" y1="0" x2="0" y2="1">
+			<stop offset="0%" stop-color="#29DCC9"/>
+			<stop offset="100%" stop-color="#22CBBB"/>
+		</linearGradient>
+
+		<linearGradient id="tealMid" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#15566B"/>
+			<stop offset="100%" stop-color="#176078"/>
+		</linearGradient>
+
+		<linearGradient id="tealBottom" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#17485B"/>
+			<stop offset="100%" stop-color="#153D50"/>
+		</linearGradient>
+
+		<linearGradient id="slate" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#293749"/>
+			<stop offset="100%" stop-color="#202D3E"/>
+		</linearGradient>
+
+		<linearGradient id="blueBottom" x1="0" y1="0" x2="1" y2="1">
+			<stop offset="0%" stop-color="#729DBD"/>
+			<stop offset="100%" stop-color="#6086A8"/>
+		</linearGradient>
+
+		<filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+			<feGaussianBlur stdDeviation="5"/>
+		</filter>
+	</defs>
+
+	<g	id="arrow-turquoise" transform="translate(-40, 0)">
+
+		<!-- Main turquoise arrow: horizontal, curved, horizontal -->
+		<path	d=" M 320,760
+					L 380,760
+					C 500,750 528,614 555,530
+					L 580, 435
+					C 595,400 600,290 720,280
+					L 770,280"
+				fill="none"
+				stroke="#21D9C7"
+				stroke-width="28"
+				stroke-linecap="round"
+				stroke-linejoin="round"/>
+
+		<!-- Left arrowhead -->
+		<path	d=" M 350,725
+					L 310,760
+					L 350,795"
+				fill="none"
+				stroke="#21D9C7"
+				stroke-width="25"
+				stroke-linecap="round"
+				stroke-linejoin="round"/>
+
+		<!-- Right arrowhead -->
+		<path	d=" M 750,245
+					L 790,280
+					L 750,315"
+				fill="none"
+				stroke="#21D9C7"
+				stroke-width="25"
+				stroke-linecap="round"
+				stroke-linejoin="round"/>
+	</g>
+
+	<defs>
+		<filter	id="white-shadow" x="-100%" y="-100%" width="300%" height="300%">
+			<feDropShadow	dx="0" dy="2" stdDeviation="15"
+							flood-color="#07151D" flood-opacity=".95"/>
+		</filter>
+	</defs>
+
+		<!-- White curved arrow -->
+	<path	d=" M 436,337.5
+				C 550,355 470,690 580,707.5"
+			fill="none"
+			stroke="#F4F6FB"
+			stroke-width="28"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			filter="url(#white-shadow)"/>
+
+	<!-- Stack A: top -->
+	<rect	x="200" y="270"
+			width="210" height="125"
+			rx="32"
+			fill="url(#cyanTop)"
+			stroke="#4DE9D9"
+			stroke-width="5"/>
+
+	<!-- Stack A: middle -->
+	<rect	x="200" y="415"
+			width="210" height="125"
+			rx="32"
+			fill="url(#tealMid)"
+			stroke="#43C3D6"
+			stroke-width="5"/>
+
+	<!-- Stack A: bottom -->
+	<rect	x="200" y="560"
+			width="210" height="125"
+			rx="32"
+			fill="url(#tealBottom)"
+			stroke="#328DA3"
+			stroke-width="5"/>
+
+	<!-- Stack B: top -->
+	<rect	x="614" y="355"
+			width="210" height="125"
+			rx="32"
+			fill="url(#slate)"
+			stroke="#91A9CB"
+			stroke-width="5"/>
+
+	<!-- Stack B: middle -->
+	<rect	x="614" y="500"
+			width="210" height="125"
+			rx="32"
+			fill="#F3F5FA"
+			stroke="#FFFFFF"
+			stroke-width="5"/>
+
+	<!-- Stack B: bottom -->
+	<rect	x="614" y="645"
+			width="210" height="125"
+			rx="32"
+			fill="url(#blueBottom)"
+			stroke="#8EB5D5"
+			stroke-width="5"/>
+
+</svg>
