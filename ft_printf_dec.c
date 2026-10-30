@@ -83,6 +83,34 @@ void	ft_print_int(t_printf *pf)
 	}
 }
 
+void	ft_print_long(t_printf *pf)
+{
+	char			digits[sizeof(unsigned long) * 3];
+	long			n;
+	unsigned long	magnitude;
+	int				count;
+
+	n = va_arg(pf->ap, long);
+	if (n < 0)
+		magnitude = (unsigned long)(-(n + 1)) + 1;
+	else
+		magnitude = (unsigned long)n;
+	count = 0;
+	while (magnitude > 0)
+	{
+		digits[count++] = (char)(magnitude % 10 + '0');
+		magnitude /= 10;
+	}
+	if (count == 0)
+		digits[count++] = '0';
+	if (pf->buf_len + count + (n < 0) > BUF_SIZE)
+		ft_print_buf(pf);
+	if (n < 0)
+		pf->buf[pf->buf_len++] = '-';
+	while (count > 0)
+		pf->buf[pf->buf_len++] = digits[--count];
+}
+
 void	ft_print_uint(t_printf *pf)
 {
 	unsigned int	n;

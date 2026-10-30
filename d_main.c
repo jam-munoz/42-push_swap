@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   d_main.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 17:19:42 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/30 07:45:16 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "d_push_swap.h"
 
-float	compute_disorder(long inversions, int size)
+static float	compute_disorder(long inversions, int size)
 {
 	long	max_inversions;
 
@@ -42,18 +42,18 @@ static void	print_benchmark(float disorder, t_strategy_info strategy)
 	ft_printf(STDERR_FILENO, "[bench] disorder: %f%%\n", disorder * 100.0f);
 	ft_printf(STDERR_FILENO, "[bench] strategy: %s / (%s)\n", strategy.name,
 		strategy.complexity);
-	ft_printf(STDERR_FILENO, "[bench] total_ops: %d\n", bench_get_total_ops());
+	ft_printf(STDERR_FILENO, "[bench] total_ops: %ld\n", bench_get_total_ops());
 	i = 0;
 	ft_printf(STDERR_FILENO, "[bench] ");
 	while (i < OP_COUNT / 2)
 	{
-		ft_printf(2, "%s: %d\t", op_names[i], bench_get_op_count(i));
+		ft_printf(2, "%s: %ld\t", op_names[i], bench_get_op_count(i));
 		i++;
 	}
 	ft_printf(STDERR_FILENO, "\n[bench] ");
 	while (i < OP_COUNT)
 	{
-		ft_printf(2, "%s: %d\t", op_names[i], bench_get_op_count(i));
+		ft_printf(2, "%s: %ld\t", op_names[i], bench_get_op_count(i));
 		i++;
 	}
 	ft_printf(STDERR_FILENO, "\n");

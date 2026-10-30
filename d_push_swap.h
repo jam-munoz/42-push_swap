@@ -95,5 +95,7 @@ void	bench_enable(int enabled);
 void	bench_record_operation(int operation);
 long	bench_get_total_ops(void);
 long	bench_get_op_count(int operation);
+void	operation_output_enable(int enabled);
+void	write_operation(const char *operation, size_t length);
 
 #endif

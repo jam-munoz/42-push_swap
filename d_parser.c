@@ -15,8 +15,10 @@
 
 static int	parse_int(char **str, t_stack **stack)
 {
-	int		sign;
-	long	sum;
+	int				sign;
+	unsigned long	limit;
+	unsigned long	sum;
+	unsigned long	digit;
 
 	sign = 1;
 	sum = 0;
@@ -28,15 +30,20 @@ static int	parse_int(char **str, t_stack **stack)
 	}
 	if (**str < '0' || '9' < **str)
 		error_exit(stack);
+	limit = INT_MAX;
+	if (sign < 0)
+		limit = (unsigned long)(-(long)INT_MIN);
 	while ('0' <= **str && **str <= '9')
 	{
-		sum = sum * 10 + (**str - '0');
+		digit = **str - '0';
+		if (sum > (limit - digit) / 10)
+			error_exit(stack);
+		sum = sum * 10 + digit;
 		(*str)++;
 	}
-	sum *= sign;
-	if ((**str != '\0' && **str != ' ') || sum < INT_MIN || sum > INT_MAX)
+	if (**str != '\0' && **str != ' ')
 		error_exit(stack);
-	return (sum);
+	return ((int)(sign * (long)sum));
 }
 
 static void	push_back(t_stack **stack, t_stack **tail, int value)

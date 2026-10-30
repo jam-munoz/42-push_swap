@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a_strategy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/23 20:00:00 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 17:30:05 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/10/30 08:25:29 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static t_strategy_info	select_adaptive(t_stack **stack_a, t_stack **stack_b,
 			make_strategy("Adaptive", "O(n^2)"));
 	if (disorder < 0.5)
 		return (chunk_sort(stack_a, stack_b),
-			make_strategy("Adaptive", "O(n√2)"));
+			make_strategy("Adaptive", "O(n√n)"));
 	radix_sort(stack_a, stack_b);
 	return (make_strategy("Adaptive", "O(n log n)"));
 }
@@ -67,7 +67,7 @@ void	select_strategy(t_request *request)
 	else if (ft_strcmp(request->mode, "--medium") == 0)
 		*request->strategy = (chunk_sort(request->stack_a,
 					request->stack_b),
-				make_strategy("Medium", "O(n√2)"));
+				make_strategy("Medium", "O(n√n)"));
 	else if (ft_strcmp(request->mode, "--complex") == 0)
 		*request->strategy = (radix_sort(request->stack_a,
 					request->stack_b),

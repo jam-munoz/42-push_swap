@@ -39,7 +39,12 @@ static void	ft_print_str(t_printf *pf)
 static void	ft_conversion(t_printf *pf)
 {
 	pf->format++;
-	if (*pf->format == 'd' || *pf->format == 'i')
+	if (*pf->format == 'l' && *(pf->format + 1) == 'd')
+	{
+		pf->format++;
+		ft_print_long(pf);
+	}
+	else if (*pf->format == 'd' || *pf->format == 'i')
 		ft_print_int(pf);
 	else if (*pf->format == 's')
 		ft_print_str(pf);

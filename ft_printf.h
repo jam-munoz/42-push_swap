@@ -29,6 +29,7 @@ typedef struct s_printf
 int		ft_printf(int fd, const char *format, ...);
 void	ft_print_buf(t_printf *pf);
 void	ft_print_int(t_printf *pf);
+void	ft_print_long(t_printf *pf);
 void	ft_print_uint(t_printf *pf);
 void	ft_print_hex(t_printf *pf);
 void	ft_print_float(t_printf *pf);

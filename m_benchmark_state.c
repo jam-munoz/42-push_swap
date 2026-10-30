@@ -12,6 +12,8 @@
 
 #include "d_push_swap.h"
 
+static int	g_operation_output = 1;
+
 int	is_bench_flag(char *str)
 {
 	return (ft_strcmp(str, "--bench") == 0);
@@ -22,4 +24,15 @@ t_bench_state	*bench_state(void)
 	static t_bench_state	state;
 
 	return (&state);
+}
+
+void	operation_output_enable(int enabled)
+{
+	g_operation_output = enabled;
+}
+
+void	write_operation(const char *operation, size_t length)
+{
+	if (g_operation_output)
+		write(STDOUT_FILENO, operation, length);
 }

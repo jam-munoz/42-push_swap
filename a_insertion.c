@@ -1,65 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertion.c                                        :+:      :+:    :+:   */
+/*   a_insertion.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/05 11:58:57 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/09 14:44:49 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "d_push_swap.h"
-
-/*
-	BUCKET A = Disordered
-	BUCKET B = Ordered
-
-	pb(A[0])
-
-	Comparation loop to find where to insert next element
-	LOOP:	SAVE:	-Look for the best lower
-					-Save best possible candidate
-			RETURN:	-Insertion position
-
-	Calculate distance and select the cheaper one
-	rb VS rrb
-
-	pb
-
-	REPEAT
-
-	When no elements in BUCKET A
-	Search for element index N - 1 = MAX_ELEMENT
-	Put MAX_ELEMENT on TOP
-	rb VS rrb
-	pa -> All Elements
-*/
-
-static int	find_insertion_position(t_stack *stack, int index)
-{
-	t_stack	*first;
-	t_stack	*next;
-	int		pos;
-
-	first = stack;
-	pos = 0;
-	while (stack)
-	{
-		next = stack->next;
-		if (!next)
-			next = first;
-		if (stack->index < next->index
-			&& (index < stack->index || index > next->index))
-			return (pos + 1);
-		if (stack->index > index && index > next->index)
-			return (pos + 1);
-		pos++;
-		stack = stack->next;
-	}
-	return (0);
-}
+#include "a_insertion.h"
 
 static int	find_max_position(t_stack *stack)
 {
@@ -78,43 +27,46 @@ static int	find_max_position(t_stack *stack)
 	return (0);
 }
 
-static void	rotate_to_position(t_stack **stack, int position)
+static void	rotate_b_to_position(t_stack **stack_b, int position)
 {
 	int	size;
 
-	if (!stack || !*stack)
-		return ;
-	size = get_stack_size(*stack);
-	if (size <= 1)
-		return ;
+	size = get_stack_size(*stack_b);
 	if (position <= size / 2)
 	{
 		while (position-- > 0)
-			rb(stack);
+			rb(stack_b);
 	}
 	else
 	{
 		position = size - position;
 		while (position-- > 0)
-			rrb(stack);
+			rrb(stack_b);
 	}
+}
+
+static void	restore_stack(t_stack **stack_a, t_stack **stack_b)
+{
+	int	position;
+
+	position = find_max_position(*stack_b);
+	rotate_b_to_position(stack_b, position);
+	while (*stack_b)
+		pa(stack_a, stack_b);
 }
 
 void	insertion_sort(t_stack **stack_a, t_stack **stack_b)
 {
-	int	position;
+	t_insertion_move	move;
 
 	if (!stack_a || !stack_b || !*stack_a)
 		return ;
 	pb(stack_a, stack_b);
 	while (*stack_a)
 	{
-		position = find_insertion_position(*stack_b, (*stack_a)->index);
-		rotate_to_position(stack_b, position);
+		move = find_best_insertion(*stack_a, *stack_b);
+		apply_insertion_rotations(stack_a, stack_b, move);
 		pb(stack_a, stack_b);
 	}
-	position = find_max_position(*stack_b);
-	rotate_to_position(stack_b, position);
-	while (*stack_b)
-		pa(stack_a, stack_b);
+	restore_stack(stack_a, stack_b);
 }

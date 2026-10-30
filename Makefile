@@ -19,6 +19,8 @@ CFLAGS = -Wall -Wextra -g
 COMMON_SOURCE_FILES = \
 	a_chunk.c \
 	a_insertion.c \
+	a_insertion_cost.c \
+	a_insertion_moves.c \
 	a_radix.c \
 	a_sort.c \
 	a_strategy.c \
@@ -50,7 +52,7 @@ BONUS_SOURCE_FILES = \
 OBJECTS = ${SOURCE_FILES:.c=.o}
 BONUS_OBJECTS = ${BONUS_SOURCE_FILES:.c=.o}
 
-%.o: %.c d_push_swap.h o_operations.h ft_printf.h b_checker_bonus.h
+%.o: %.c a_insertion.h d_push_swap.h o_operations.h ft_printf.h b_checker_bonus.h
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJECTS}
@@ -69,4 +71,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all bonus clean fclean re
