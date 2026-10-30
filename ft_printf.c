@@ -25,14 +25,13 @@ static void	ft_print_str(t_printf *pf)
 	char	*str;
 
 	str = va_arg(pf->ap, char *);
-	if (str == (void *)0)
+	if (!str)
 		str = "(null)";
-	while (*str != '\0')
+	while (*str)
 	{
-		pf->buf[pf->buf_len++] = *str;
+		pf->buf[pf->buf_len++] = *str++;
 		if (pf->buf_len == BUF_SIZE)
 			ft_print_buf(pf);
-		str++;
 	}
 }
 
@@ -51,19 +50,31 @@ static void	ft_conversion(t_printf *pf)
 	else if (*pf->format == 'f')
 		ft_print_float(pf);
 	else if (*pf->format == 'c')
-	{
 		pf->buf[pf->buf_len++] = (char)va_arg(pf->ap, int);
-	}
 	else if (*pf->format == 'u')
 		ft_print_uint(pf);
 	else if (*pf->format == 'x' || *pf->format == 'X')
 		ft_print_hex(pf);
 	else if (*pf->format == '%')
-	{
 		pf->buf[pf->buf_len++] = '%';
-	}
 	else if (*pf->format == 'p')
 		ft_print_ptr(pf);
+}
+
+static void	ft_process_format(t_printf *pf)
+{
+	while (*pf->format != '\0')
+	{
+		if (*pf->format == '%')
+			ft_conversion(pf);
+		else
+			pf->buf[pf->buf_len++] = *pf->format;
+		if (pf->buf_len == BUF_SIZE)
+			ft_print_buf(pf);
+		pf->format++;
+	}
+	if (pf->buf_len > 0)
+		ft_print_buf(pf);
 }
 
 int	ft_printf(int fd, const char *format, ...)
@@ -75,20 +86,7 @@ int	ft_printf(int fd, const char *format, ...)
 	pf.count = 0;
 	pf.fd = fd;
 	va_start(pf.ap, format);
-	while (*pf.format != '\0')
-	{
-		if (*pf.format == '%')
-			ft_conversion(&pf);
-		else
-		{
-			pf.buf[pf.buf_len++] = *pf.format;
-		}
-		if (pf.buf_len == BUF_SIZE)
-			ft_print_buf(&pf);
-		pf.format++;
-	}
+	ft_process_format(&pf);
 	va_end(pf.ap);
-	if (pf.buf_len > 0)
-		ft_print_buf(&pf);
 	return (pf.count);
 }

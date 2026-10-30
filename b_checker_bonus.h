@@ -16,4 +16,7 @@
 # include "d_push_swap.h"
 # include "ft_get_next_line.h"
 
+int	apply_checker_instruction(char *instruction, t_stack **stack_a,
+		t_stack **stack_b);
+
 #endif

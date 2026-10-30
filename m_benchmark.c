@@ -49,10 +49,3 @@ long	bench_get_total_ops(void)
 {
 	return (bench_state()->total_ops);
 }
-
-long	bench_get_op_count(int operation)
-{
-	if (operation < 0 || operation >= OP_COUNT)
-		return (0);
-	return (bench_state()->op_counts[operation]);
-}

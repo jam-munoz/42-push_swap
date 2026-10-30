@@ -5,10 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/30 22:56:12 by divillan          #+#    #+#             */
+/*   Updated: 2026/10/30 22:56:15 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "a_insertion.h"
+#include "d_push_swap.h"
 
 static int	find_max_position(t_stack *stack)
 {
@@ -64,7 +66,7 @@ void	insertion_sort(t_stack **stack_a, t_stack **stack_b)
 	pb(stack_a, stack_b);
 	while (*stack_a)
 	{
-		move = find_best_insertion(*stack_a, *stack_b);
+		find_best_insertion(*stack_a, *stack_b, &move);
 		apply_insertion_rotations(stack_a, stack_b, move);
 		pb(stack_a, stack_b);
 	}

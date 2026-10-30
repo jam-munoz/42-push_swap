@@ -72,6 +72,16 @@ typedef struct s_bench_state
 	long	op_counts[OP_COUNT];
 }	t_bench_state;
 
+typedef struct s_insertion_move
+{
+	int	a_rotations;
+	int	b_rotations;
+	int	size_a;
+	int	size_b;
+	int	total;
+	int	found;
+}	t_insertion_move;
+
 int		parse_args(int argc, char *argv[], t_stack **stack,
 			t_run_config *config);
 int		is_mode_flag(char *str);
@@ -95,7 +105,9 @@ void	bench_enable(int enabled);
 void	bench_record_operation(int operation);
 long	bench_get_total_ops(void);
 long	bench_get_op_count(int operation);
-void	operation_output_enable(int enabled);
-void	write_operation(const char *operation, size_t length);
+void	find_best_insertion(t_stack *stack_a, t_stack *stack_b,
+			t_insertion_move *best);
+void	apply_insertion_rotations(t_stack **stack_a, t_stack **stack_b,
+			t_insertion_move move);
 
 #endif

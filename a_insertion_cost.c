@@ -5,9 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/30 22:54:25 by divillan          #+#    #+#             */
+/*   Updated: 2026/10/30 22:54:44 by divillan         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "a_insertion.h"
+#include "d_push_swap.h"
 
 static int	find_insert_position(t_stack *stack, int index)
 {
@@ -68,33 +71,33 @@ static void	save_candidate(t_insertion_move *best, int a_rot, int b_rot)
 	}
 }
 
-static void	consider_candidate(t_insertion_move *best, int a_pos, int b_pos,
-		int size_a, int size_b)
+static void	consider_candidate(t_insertion_move *best, int a_pos, int b_pos)
 {
 	save_candidate(best, a_pos, b_pos);
-	save_candidate(best, a_pos, b_pos - size_b);
-	save_candidate(best, a_pos - size_a, b_pos);
-	save_candidate(best, a_pos - size_a, b_pos - size_b);
+	save_candidate(best, a_pos, b_pos - best->size_b);
+	save_candidate(best, a_pos - best->size_a, b_pos);
+	save_candidate(best, a_pos - best->size_a, b_pos - best->size_b);
 }
 
-t_insertion_move	find_best_insertion(t_stack *stack_a, t_stack *stack_b)
+void	find_best_insertion(t_stack *stack_a, t_stack *stack_b,
+		t_insertion_move *best)
 {
-	t_insertion_move	best;
-	int					size_a;
-	int					size_b;
-	int					a_pos;
+	int	size_a;
+	int	size_b;
+	int	a_pos;
 
-	best.found = 0;
-	best.total = 0;
+	best->found = 0;
+	best->total = 0;
 	size_a = get_stack_size(stack_a);
 	size_b = get_stack_size(stack_b);
+	best->size_a = size_a;
+	best->size_b = size_b;
 	a_pos = 0;
 	while (stack_a)
 	{
-		consider_candidate(&best, a_pos,
-			find_insert_position(stack_b, stack_a->index), size_a, size_b);
+		consider_candidate(best, a_pos,
+			find_insert_position(stack_b, stack_a->index));
 		stack_a = stack_a->next;
 		a_pos++;
 	}
-	return (best);
 }

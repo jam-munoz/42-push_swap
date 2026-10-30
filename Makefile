@@ -52,7 +52,7 @@ BONUS_SOURCE_FILES = \
 OBJECTS = ${SOURCE_FILES:.c=.o}
 BONUS_OBJECTS = ${BONUS_SOURCE_FILES:.c=.o}
 
-%.o: %.c a_insertion.h d_push_swap.h o_operations.h ft_printf.h b_checker_bonus.h
+%.o: %.c d_push_swap.h o_operations.h ft_printf.h b_checker_bonus.h
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
 ${NAME}: ${OBJECTS}

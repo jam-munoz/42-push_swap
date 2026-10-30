@@ -18,27 +18,21 @@ static int	parse_int(char **str, t_stack **stack)
 	int				sign;
 	unsigned long	limit;
 	unsigned long	sum;
-	unsigned long	digit;
 
-	sign = 1;
-	sum = 0;
+	sign = 1 - 2 * (**str == '-');
 	if (**str == '+' || **str == '-')
-	{
-		if (**str == '-')
-			sign = -1;
 		(*str)++;
-	}
 	if (**str < '0' || '9' < **str)
 		error_exit(stack);
 	limit = INT_MAX;
 	if (sign < 0)
 		limit = (unsigned long)(-(long)INT_MIN);
+	sum = 0;
 	while ('0' <= **str && **str <= '9')
 	{
-		digit = **str - '0';
-		if (sum > (limit - digit) / 10)
+		if (sum > (limit - (**str - '0')) / 10)
 			error_exit(stack);
-		sum = sum * 10 + digit;
+		sum = sum * 10 + (**str - '0');
 		(*str)++;
 	}
 	if (**str != '\0' && **str != ' ')

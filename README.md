@@ -7,7 +7,7 @@
 ### A 42 Common Core Project
 
   <div align="center">
-    <img  src="docs/assets/banner.svg"
+    <img  src="https://raw.githubusercontent.com/divillan/42_README/main/push_swap/assets/banner.svg"
           alt="Push_swap banner"
           width="100%">
   </div>

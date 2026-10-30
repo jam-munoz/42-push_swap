@@ -5,9 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/10/30 22:55:07 by divillan          #+#    #+#             */
+/*   Updated: 2026/10/30 22:55:11 by divillan         ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
-#include "a_insertion.h"
+#include "d_push_swap.h"
 
 static void	apply_shared_rotations(t_stack **stack_a, t_stack **stack_b,
 		t_insertion_move *move)
