@@ -43,12 +43,14 @@ static void	read_instructions(t_stack **stack_a, t_stack **stack_b)
 		if (!apply_checker_instruction(instruction, stack_a, stack_b))
 		{
 			free(instruction);
+			get_next_line_clear();
 			clear_stack(stack_b);
 			error_exit(stack_a);
 		}
 		free(instruction);
 		instruction = get_next_line(STDIN_FILENO);
 	}
+	get_next_line_clear();
 }
 
 static void	check_stack(t_stack *stack_a, t_stack *stack_b)

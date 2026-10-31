@@ -40,49 +40,45 @@ static char	*get_stash(int fd, char *stash)
 	return (stash);
 }
 
-static char	*ft_get_line(char *stash, char **p)
+static char	*extract_line(char **stash)
 {
 	char	*line;
+	char	*next;
+	char	*p;
 	size_t	len;
 
-	*p = ft_strchr(stash, '\n');
-	if (*p != NULL)
+	if (**stash == '\0')
 	{
-		len = *p - stash + 1;
-		line = ft_strdup(stash, len);
+		free(*stash);
+		*stash = NULL;
+		return (NULL);
+	}
+	p = ft_strchr(*stash, '\n');
+	len = ft_strlen(*stash);
+	if (p != NULL)
+	{
+		len = p - *stash + 1;
+		next = ft_strdup(p + 1, ft_strlen(p + 1));
 	}
 	else
-	{
-		line = ft_strdup(stash, ft_strlen(stash));
-	}
-	return (line);
-}
-
-static char	*ft_next_line(char *stash, char **p)
-{
-	char	*next;
-
-	if (*p != NULL)
-	{
-		*p = *p + 1;
-		next = ft_strdup(*p, ft_strlen(*p));
-	}
-	else
-	{
 		next = NULL;
-	}
-	free(stash);
-	stash = NULL;
-	return (next);
+	line = ft_strdup(*stash, len);
+	free(*stash);
+	*stash = next;
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*stash;
-	char		*line;
-	char		*p;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0)
+	{
+		free(stash);
+		stash = NULL;
+		return (NULL);
+	}
+	if (BUFFER_SIZE <= 0)
 		return (NULL);
 	if (stash == NULL)
 	{
@@ -94,13 +90,10 @@ char	*get_next_line(int fd)
 	stash = get_stash(fd, stash);
 	if (stash == NULL)
 		return (NULL);
-	if (*stash == '\0')
-	{
-		free(stash);
-		stash = NULL;
-		return (NULL);
-	}
-	line = ft_get_line(stash, &p);
-	stash = ft_next_line(stash, &p);
-	return (line);
+	return (extract_line(&stash));
+}
+
+void	get_next_line_clear(void)
+{
+	get_next_line(-1);
 }

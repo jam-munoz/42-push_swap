@@ -38,7 +38,7 @@ A sorting challenge focused on algorithm design, optimization and problem solvin
 The project also includes `checker`, which reads an initial sequence and a list of operations, applies them, and reports whether the final state is sorted correctly.
 
 For a detailed walkthrough of the architecture, parsing, ranking, algorithms,
-operations, and checker, see the [project study guide](docs/PROJECT_STUDY_GUIDE.md).
+operations, and checker, see the [Project Guide](https://github.com/divillan/42_README/blob/main/push_swap/docs/PROJECT_GUIDE.md).
 
 ---
 
@@ -70,10 +70,11 @@ The same merge-sort pass counts inversions: pairs of values that are out of asce
 
 The strategy can be selected with a command-line mode:
 
-* **Simple (`--simple`) — greedy insertion strategy.** It starts by pushing one value from A to B, then keeps B in circular descending order. For every remaining value in A, it finds the position where that value can be inserted into B and estimates the rotations needed to bring both the value and its insertion position to the top. It considers forward and reverse rotations on both stacks, including combined `rr`/`rrr` moves, and chooses the candidate with the lowest estimated operation count. After pushing all values to B, it rotates the largest rank to the top and moves the values back to A. This greedy choice reduces unnecessary rotations compared with always inserting the top of A, though finding the cheapest candidate at each step still involves repeated scans and does not guarantee a globally minimal sequence.
-* **Medium (`--medium`) — chunk strategy.** The algorithm uses a moving rank window whose width is approximately the square root of the input size. While scanning A, it pushes ranks within the current window to B and advances the window as values are transferred. Ranks at the lower edge are rotated down in B to help keep larger ranks accessible. After all ranks have been transferred, it repeatedly locates the largest remaining rank in B, rotates it to the top using the shorter direction, and pushes it back to A. Chunking aims to balance the number of scans and rotations; the actual move count depends on the input order.
-* **Complex (`--complex`) — binary radix strategy.** The algorithm processes the rank bits from least significant to most significant. For each bit, it scans A once: ranks with a `1` bit are rotated in A, and ranks with a `0` bit are pushed to B. It then pushes all values back from B to A before processing the next bit. Because ranks are non-negative and bounded by the input size, this produces a predictable `O(n log n)` number of operations, where `n` is the number of values.
-* **Adaptive (`--adaptive`, the default).** Inputs of two to five elements use dedicated small-stack routines. Larger inputs use the measured disorder to choose insertion for disorder below `0.2`, chunks below `0.5`, and radix otherwise. This aims to use the simpler strategy for nearly ordered inputs and the more predictable radix strategy for highly disordered inputs.
+* **Small inputs (2–5 values).** Every mode uses dedicated small-stack routines for these sizes. This avoids applying a general-purpose strategy when a short, fixed sequence of operations can sort the stack.
+* **Simple (`--simple`) — greedy insertion strategy.** For larger inputs, it starts by pushing one value from A to B, then keeps B in circular descending order. For every remaining value in A, it finds the position where that value can be inserted into B and estimates the rotations needed to bring both the value and its insertion position to the top. It considers forward and reverse rotations on both stacks, including combined `rr`/`rrr` moves, and chooses the candidate with the lowest estimated operation count. After pushing all values to B, it rotates the largest rank to the top and moves the values back to A. This greedy choice reduces unnecessary rotations compared with always inserting the top of A, though finding the cheapest candidate at each step still involves repeated scans and does not guarantee a globally minimal sequence.
+* **Medium (`--medium`) — chunk strategy.** For larger inputs, the algorithm uses a moving rank window whose width is approximately the square root of the input size. While scanning A, it pushes ranks within the current window to B and advances the window as values are transferred. Ranks at the lower edge are rotated down in B to help keep larger ranks accessible. After all ranks have been transferred, it repeatedly locates the largest remaining rank in B, rotates it to the top using the shorter direction, and pushes it back to A. Chunking aims to balance the number of scans and rotations; the actual move count depends on the input order.
+* **Complex (`--complex`) — binary radix strategy.** For larger inputs, the algorithm processes the rank bits from least significant to most significant. For each bit, it scans A once: ranks with a `1` bit are rotated in A, and ranks with a `0` bit are pushed to B. It then pushes all values back from B to A before processing the next bit. Because ranks are non-negative and bounded by the input size, this produces a predictable `O(n log n)` number of operations, where `n` is the number of values.
+* **Adaptive (`--adaptive`, the default).** Inputs of two to five elements use the same dedicated small-stack routines. Larger inputs use the measured disorder to choose insertion for disorder below `0.2`, chunks below `0.5`, and radix otherwise. This aims to use the simpler strategy for nearly ordered inputs and the more predictable radix strategy for highly disordered inputs.
 
 The strategy names describe their intended trade-offs; the number of emitted operations is input-dependent, especially for insertion and chunks. Use `--bench` to inspect the measured disorder, selected strategy, and operation counts for a run.
 
@@ -96,7 +97,8 @@ This creates `push_swap` and the bonus executable `checker`.
 ./push_swap [--simple|--medium|--complex|--adaptive] [--bench] <numbers...>
 ```
 
-Provide the integers as separate arguments or as a space-separated string:
+Provide the integers as separate arguments or as a space-separated string. Empty
+arguments are invalid:
 
 ```sh
 ./push_swap 3 2 1

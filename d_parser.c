@@ -72,6 +72,8 @@ static int	parse_str(char *str, t_stack **stack, t_stack **tail)
 			count++;
 		}
 	}
+	if (count == 0)
+		error_exit(stack);
 	return (count);
 }
 

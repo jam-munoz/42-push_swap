@@ -32,22 +32,39 @@ int	is_mode_flag(char *str)
 	return (ft_strcmp(str, "--adaptive") == 0);
 }
 
+static t_strategy_info	select_small(const char *mode, t_stack **stack_a,
+		t_stack **stack_b)
+{
+	const char	*name;
+	int			n;
+
+	n = get_stack_size(*stack_a);
+	if (n == 2)
+		two_sort(stack_a);
+	else if (n == 3)
+		three_sort(stack_a, 0);
+	else if (n == 4)
+		four_sort(stack_a, stack_b);
+	else if (n == 5)
+		five_sort(stack_a, stack_b);
+	name = "Adaptive";
+	if (ft_strcmp(mode, "--simple") == 0)
+		name = "Simple";
+	else if (ft_strcmp(mode, "--medium") == 0)
+		name = "Medium";
+	else if (ft_strcmp(mode, "--complex") == 0)
+		name = "Complex";
+	return (make_strategy(name, "O(1)"));
+}
+
 static t_strategy_info	select_adaptive(t_stack **stack_a, t_stack **stack_b,
 		float disorder)
 {
 	int	n;
 
 	n = get_stack_size(*stack_a);
-	if (n == 2)
-		return (two_sort(stack_a), make_strategy("Adaptive", "O(1)"));
-	if (n == 3)
-		return (three_sort(stack_a, 0), make_strategy("Adaptive", "O(1)"));
-	if (n == 4)
-		return (four_sort(stack_a, stack_b),
-			make_strategy("Adaptive", "O(1)"));
-	if (n == 5)
-		return (five_sort(stack_a, stack_b),
-			make_strategy("Adaptive", "O(1)"));
+	if (n <= 5)
+		return (select_small("--adaptive", stack_a, stack_b));
 	if (disorder < 0.2)
 		return (insertion_sort(stack_a, stack_b),
 			make_strategy("Adaptive", "O(n^2)"));
@@ -60,7 +77,10 @@ static t_strategy_info	select_adaptive(t_stack **stack_a, t_stack **stack_b,
 
 void	select_strategy(t_request *request)
 {
-	if (ft_strcmp(request->mode, "--simple") == 0)
+	if (get_stack_size(*request->stack_a) <= 5)
+		*request->strategy = select_small(request->mode,
+				request->stack_a, request->stack_b);
+	else if (ft_strcmp(request->mode, "--simple") == 0)
 		*request->strategy = (insertion_sort(request->stack_a,
 					request->stack_b),
 				make_strategy("Simple", "O(n^2)"));
