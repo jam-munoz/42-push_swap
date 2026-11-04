@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_main.c                                           :+:      :+:    :+:   :+:    :+:   */
+/*   d_main.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
+/*   Updated: 2026/11/04 16:49:09 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ int	main(int argc, char *argv[])
 	size = parse_args(argc, argv, &stack_a, &config);
 	bench_state()->quiet = config.count;
 	run_sort(&stack_a, &stack_b, &config, size);
-	if (config.count)
-		print_operation_count();
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);

@@ -31,7 +31,6 @@ COMMON_SOURCE_FILES = \
 	ft_printf_hex.c \
 	m_benchmark.c \
 	m_benchmark_state.c \
-	m_count_output.c \
 	o_push.c \
 	o_rev_rotate.c \
 	o_rotate.c \

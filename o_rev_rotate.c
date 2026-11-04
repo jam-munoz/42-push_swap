@@ -2,14 +2,14 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   o_rev_rotate.c                                     :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     +#+        */
+/*                                                    +:+ +:+         +:+     */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
+/*   Created: 2026/11/04 00:00:00 by divillan          #+#    #+#             */
+/*   Updated: 2026/11/04 16:50:05 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "o_operations.h"
 #include "d_push_swap.h"
 
 static void	rev_rotate(t_stack **stack)

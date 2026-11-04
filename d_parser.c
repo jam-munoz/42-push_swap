@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_parser.c                                          :+:      :+:    :+:   :+:    :+:   */
+/*   d_parser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 17:02:25 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
+/*   Updated: 2026/11/04 16:49:27 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,6 @@ static void	parse_argument(char *arg, t_parse_context *context)
 			error_exit(context->stack);
 		context->config->bench = 1;
 	}
-	else if (!context->numbers_found && ft_strcmp(arg, "--count") == 0)
-		context->config->count = 1;
 	else
 	{
 		if (arg[0] == '-' && arg[1] == '-')
