@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_main.c                                           :+:      :+:    :+:   */
+/*   d_main.c                                           :+:      :+:    :+:   :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:20 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/30 07:45:16 by divillan         ###   ########.fr       */
+/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	run_sort(t_stack **stack_a, t_stack **stack_b,
 	t_request		request;
 
 	bench_reset();
-	bench_enable(config->bench);
+	bench_enable(config->bench || config->count);
 	inversions = index_stack(stack_a, size);
 	disorder = compute_disorder(inversions, size);
 	strategy.name = "no_sort (already sorted)";
@@ -98,7 +98,10 @@ int	main(int argc, char *argv[])
 	stack_a = NULL;
 	stack_b = NULL;
 	size = parse_args(argc, argv, &stack_a, &config);
+	bench_state()->quiet = config.count;
 	run_sort(&stack_a, &stack_b, &config, size);
+	if (config.count)
+		print_operation_count();
 	clear_stack(&stack_a);
 	clear_stack(&stack_b);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   d_push_swap.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/01 23:12:37 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 17:27:28 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ typedef struct s_run_config
 {
 	char	*mode;
 	int		bench;
-}	t_run_config;
+	int		count;
+}t_run_config;
 
 typedef struct s_parse_context
 {
@@ -32,13 +33,13 @@ typedef struct s_parse_context
 	int				numbers_found;
 	int				mode_found;
 	int				count;
-}	t_parse_context;
+}t_parse_context;
 
 typedef struct s_strategy_info
 {
 	const char	*name;
 	const char	*complexity;
-}	t_strategy_info;
+}t_strategy_info;
 
 typedef struct s_strategy_request
 {
@@ -47,7 +48,7 @@ typedef struct s_strategy_request
 	t_stack			**stack_b;
 	float			disorder;
 	t_strategy_info	*strategy;
-}	t_request;
+}t_request;
 
 typedef enum e_operation
 {
@@ -63,14 +64,15 @@ typedef enum e_operation
 	OP_RRB,
 	OP_RRR,
 	OP_COUNT
-}	t_operation;
+}t_operation;
 
 typedef struct s_bench_state
 {
+	int		quiet;
 	int		enabled;
 	long	total_ops;
 	long	op_counts[OP_COUNT];
-}	t_bench_state;
+}t_bench_state;
 
 typedef struct s_insertion_move
 {
@@ -80,7 +82,7 @@ typedef struct s_insertion_move
 	int	size_b;
 	int	total;
 	int	found;
-}	t_insertion_move;
+}t_insertion_move;
 
 int		parse_args(int argc, char *argv[], t_stack **stack,
 			t_run_config *config);
@@ -105,6 +107,8 @@ void	bench_enable(int enabled);
 void	bench_record_operation(int operation);
 long	bench_get_total_ops(void);
 long	bench_get_op_count(int operation);
+t_bench_state	*bench_state(void);
+void	print_operation_count(void);
 void	find_best_insertion(t_stack *stack_a, t_stack *stack_b,
 			t_insertion_move *best);
 void	apply_insertion_rotations(t_stack **stack_a, t_stack **stack_b,

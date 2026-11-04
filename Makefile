@@ -2,11 +2,9 @@
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#              #
-#    Updated: 2026/10/25 17:28:40 by joamunoz         ###   ########.fr        #
+#                                                    +#+#+#+#+#+   +#+           #
+#    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#             #
+#    Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +31,7 @@ COMMON_SOURCE_FILES = \
 	ft_printf_hex.c \
 	m_benchmark.c \
 	m_benchmark_state.c \
+	m_count_output.c \
 	o_push.c \
 	o_rev_rotate.c \
 	o_rotate.c \

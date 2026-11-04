@@ -6,7 +6,7 @@
 /*   By: divillan <divillan@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/30 23:00:00 by divillan          #+#    #+#             */
-/*   Updated: 2026/10/30 23:00:00 by divillan         ###   ########.fr       */
+/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int	main(int argc, char *argv[])
 	stack_a = NULL;
 	stack_b = NULL;
 	init_checker(argc, argv, &stack_a);
+	bench_state()->quiet = 1;
 	read_instructions(&stack_a, &stack_b);
 	check_stack(stack_a, stack_b);
 	clear_stack(&stack_a);
