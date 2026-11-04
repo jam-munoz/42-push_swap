@@ -25,10 +25,6 @@ COMMON_SOURCE_FILES = \
 	d_index.c \
 	d_parser.c \
 	d_utils.c \
-	ft_printf.c \
-	ft_printf_dec.c \
-	ft_printf_float.c \
-	ft_printf_hex.c \
 	m_benchmark.c \
 	m_benchmark_state.c \
 	o_push.c \
@@ -38,6 +34,10 @@ COMMON_SOURCE_FILES = \
 
 SOURCE_FILES = \
 	d_main.c \
+	ft_printf.c \
+	ft_printf_dec.c \
+	ft_printf_float.c \
+	ft_printf_hex.c \
 	$(COMMON_SOURCE_FILES)
 
 BONUS_SOURCE_FILES = \

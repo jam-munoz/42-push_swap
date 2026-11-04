@@ -1,16 +1,17 @@
 *This project has been created as part of the 42 curriculum by joamunoz and divillan*
 
- <div align="center">
+<div align="center">
 
 # `PUSH_SWAP`
 
 ### A 42 Common Core Project
 
-  <div align="center">
-    <img  src="https://raw.githubusercontent.com/divillan/42_README/main/push_swap/assets/banner.svg"
-          alt="Push_swap banner"
-          width="100%">
-  </div>
+<div align="center">
+  <img
+	src="https://raw.githubusercontent.com/divillan/42_README/main/push_swap/assets/banner.svg"
+	alt="Push_swap banner"
+	width="100%">
+</div>
 
 <p>
   <img src="https://img.shields.io/badge/42-Common_Core-000000?style=for-the-badge&logo=42&logoColor=white">
@@ -23,9 +24,7 @@
 
 A sorting challenge focused on algorithm design, optimization and problem solving in C.
 
-<br>
-
-[Description](#description) · [Algorithms](#algorithms) · [Instructions](#instructions) · [Resources](#resources) · [Authors](#authors)
+[Description](#description) · [Algorithms](#algorithms) · [Checker](#checker) · [Instructions](#instructions) · [Resources](#resources) · [Authors](#authors)
 
 </div>
 
@@ -33,12 +32,13 @@ A sorting challenge focused on algorithm design, optimization and problem solvin
 
 ## Description
 
-**Push_swap** is a 42 Common Core project about sorting integers with two stacks and a restricted instruction set. The `push_swap` program reads a sequence of integers and prints a sequence of operations that sorts them in ascending order in stack A, using as few operations as practical. Stack B is an auxiliary stack and must be empty at the end.
+**Push_swap** is a 42 Common Core project focused on sorting a sequence of integers using two stacks and a restricted set of operations.
 
-The project also includes `checker`, which reads an initial sequence and a list of operations, applies them, and reports whether the final state is sorted correctly.
+The `push_swap` program receives a sequence of integers and outputs a series of instructions that sorts stack A in ascending order. Stack B is used as auxiliary storage during the process and must be empty when sorting is complete.
 
-For a detailed walkthrough of the architecture, parsing, ranking, algorithms,
-operations, and checker, see the [Project Guide](https://github.com/divillan/42_README/blob/main/push_swap/docs/PROJECT_GUIDE.md).
+The challenge is not only to produce a valid sequence of operations, but also to design strategies that perform well while respecting the constraints of the instruction set.
+
+The project also includes a `checker` executable, which reads an initial sequence and a list of instructions, applies them to the stacks, and verifies whether the final state is correctly sorted.
 
 ---
 
@@ -46,37 +46,104 @@ operations, and checker, see the [Project Guide](https://github.com/divillan/42_
 
 ### Stack operations
 
-The programs use the standard push_swap operations:
+Both programs use the standard set of Push_swap instructions:
 
 | Operation | Effect |
-|---|---|
+|:---:|---|
 | `sa`, `sb` | Swap the top two elements of stack A or B. |
-| `ss` | Apply `sa` and `sb` together. |
+| `ss` | Apply `sa` and `sb` simultaneously. |
 | `pa`, `pb` | Push the top element from one stack onto the other. |
 | `ra`, `rb` | Rotate a stack upwards: its first element becomes its last. |
-| `rr` | Apply `ra` and `rb` together. |
+| `rr` | Apply `ra` and `rb` simultaneously. |
 | `rra`, `rrb` | Reverse rotate a stack: its last element becomes its first. |
-| `rrr` | Apply `rra` and `rrb` together. |
+| `rrr` | Apply `rra` and `rrb` simultaneously. |
 
 An operation on a stack with fewer than two elements leaves that stack unchanged.
 
-### Ranking the input
+### Parsing and indexing
 
-Before selecting a sorting strategy, `push_swap` sorts pointers to the input values with merge sort and assigns each value a zero-based rank. The smallest value gets rank `0`, the next gets rank `1`, and so on. The original integers are preserved in the stack; the ranks make comparisons independent of their magnitude and allow radix sort to work with negative and widely spaced input values. Duplicate values are rejected.
+Before sorting begins, the input is validated and stored in a linked-list-based stack structure.
 
-The same merge-sort pass counts inversions: pairs of values that are out of ascending order. The program divides this count by the maximum possible number of inversions to estimate input disorder, from `0` (already sorted) to `1` (reverse sorted). If the stack is already sorted, no sorting operations are emitted.
+The indexing stage orders pointers to the stack elements using **merge sort**, then assigns each value a zero-based rank:
 
-### Available strategies
+- The smallest value receives rank `0`.
+- The next smallest receives rank `1`.
+- The largest value receives rank `n - 1`.
 
-The strategy can be selected with a command-line mode:
+The original integers remain stored in the stack; their ranks are used by the sorting strategies. This normalization makes the algorithms independent of the actual magnitude or sign of the input values and is particularly useful for radix sort.
 
-* **Small inputs (2–5 values).** Every mode uses dedicated small-stack routines for these sizes. This avoids applying a general-purpose strategy when a short, fixed sequence of operations can sort the stack.
-* **Simple (`--simple`) — greedy insertion strategy.** For larger inputs, it starts by pushing one value from A to B, then keeps B in circular descending order. For every remaining value in A, it finds the position where that value can be inserted into B and estimates the rotations needed to bring both the value and its insertion position to the top. It considers forward and reverse rotations on both stacks, including combined `rr`/`rrr` moves, and chooses the candidate with the lowest estimated operation count. After pushing all values to B, it rotates the largest rank to the top and moves the values back to A. This greedy choice reduces unnecessary rotations compared with always inserting the top of A, though finding the cheapest candidate at each step still involves repeated scans and does not guarantee a globally minimal sequence.
-* **Medium (`--medium`) — chunk strategy.** For larger inputs, the algorithm uses a moving rank window whose width is approximately the square root of the input size. While scanning A, it pushes ranks within the current window to B and advances the window as values are transferred. Ranks at the lower edge are rotated down in B to help keep larger ranks accessible. After all ranks have been transferred, it repeatedly locates the largest remaining rank in B, rotates it to the top using the shorter direction, and pushes it back to A. Chunking aims to balance the number of scans and rotations; the actual move count depends on the input order.
-* **Complex (`--complex`) — binary radix strategy.** For larger inputs, the algorithm processes the rank bits from least significant to most significant. For each bit, it scans A once: ranks with a `1` bit are rotated in A, and ranks with a `0` bit are pushed to B. It then pushes all values back from B to A before processing the next bit. Because ranks are non-negative and bounded by the input size, this produces a predictable `O(n log n)` number of operations, where `n` is the number of values.
-* **Adaptive (`--adaptive`, the default).** Inputs of two to five elements use the same dedicated small-stack routines. Larger inputs use the measured disorder to choose insertion for disorder below `0.2`, chunks below `0.5`, and radix otherwise. This aims to use the simpler strategy for nearly ordered inputs and the more predictable radix strategy for highly disordered inputs.
+Duplicate values and invalid input are rejected.
 
-The strategy names describe their intended trade-offs; the number of emitted operations is input-dependent, especially for insertion and chunks. Use `--bench` to inspect the measured disorder, selected strategy, and operation counts for a run.
+The merge-sort process also provides a measure of input disorder. This value is used by the adaptive strategy to choose an appropriate sorting approach.
+
+### Sorting strategies
+
+The project implements three main sorting strategies, alongside an adaptive mode.
+
+#### Simple — Greedy insertion (`--simple`)
+
+The insertion strategy builds stack B in circular descending order.
+
+1. It moves an initial element from A to B.
+2. For every remaining element in A, it determines the appropriate insertion position in B.
+3. It evaluates the rotations required to bring the element and its target position to the top of their respective stacks.
+4. It considers forward and reverse rotations, including combined `rr` and `rrr` operations, and selects the candidate with the lowest estimated cost.
+5. Once all elements have been transferred, it brings the largest rank to the top of B and pushes the elements back to A.
+
+This greedy approach aims to reduce unnecessary rotations by choosing the most convenient insertion at each step. Its performance depends on the initial arrangement of the input.
+
+#### Medium — Chunk strategy (`--medium`)
+
+The chunk strategy divides the ranked input into progressively processed ranges.
+
+1. It calculates a chunk width based approximately on the square root of the input size.
+2. It scans stack A and transfers elements belonging to the current rank range to B.
+3. Elements at the lower end of the current range are rotated in B, helping keep higher ranks accessible.
+4. After transferring all elements, it repeatedly finds the largest remaining rank in B, rotates it to the top using the shorter direction, and pushes it back to A.
+
+Chunking balances the work involved in scanning A and reorganizing B. The resulting sequence depends on the input order.
+
+#### Complex — Binary radix (`--complex`)
+
+The radix strategy sorts the normalized ranks by processing their binary representation, one bit at a time, from least significant to most significant.
+
+For each bit position:
+
+1. It scans stack A.
+2. Elements whose current bit is `1` are rotated in A.
+3. Elements whose current bit is `0` are pushed to B.
+4. Once the pass is complete, all elements are pushed back from B to A.
+
+Because the ranks are non-negative and bounded by the input size, radix provides predictable `O(n log n)` time complexity and is well suited to larger, highly disordered inputs.
+
+### Adaptive strategy (`--adaptive`)
+
+Adaptive mode is the default when no strategy flag is provided.
+
+For inputs of two to five elements, the program uses dedicated small-stack routines. For larger inputs, it evaluates the input disorder and selects a strategy:
+
+| Input disorder | Selected strategy |
+|---|---|
+| Below `0.2` | Greedy insertion |
+| From `0.2` to below `0.5` | Chunk |
+| `0.5` or above | Binary radix |
+
+The goal is to match the strategy to the structure of the input: insertion for nearly ordered sequences, chunks for intermediate cases, and radix for highly disordered sequences.
+
+---
+
+## Checker
+
+The bonus executable, `checker`, validates a sequence of Push_swap instructions.
+
+It receives the same initial integer sequence as `push_swap`, reads instructions from standard input, and applies them to stacks A and B.
+
+After the input stream ends, it checks that:
+
+- Stack A is sorted in ascending order.
+- Stack B is empty.
+
+It prints `OK` when both conditions are satisfied and `KO` otherwise. Invalid instructions are treated as errors.
 
 ---
 
@@ -84,67 +151,109 @@ The strategy names describe their intended trade-offs; the number of emitted ope
 
 ### Build
 
+Compile the mandatory program and the bonus checker:
+
 ```sh
 make
 make bonus
 ```
 
-This creates `push_swap` and the bonus executable `checker`.
+This creates two executables:
+
+- `push_swap`
+- `checker`
 
 ### Run the sorter
 
 ```sh
-./push_swap [--simple|--medium|--complex|--adaptive] [--bench] <numbers...>
+./push_swap [--simple|--medium|--complex|--adaptive] <numbers...>
 ```
 
-Provide the integers as separate arguments or as a space-separated string. Empty
-arguments are invalid:
+The strategy flag is optional. If omitted, the adaptive strategy is used.
+
+Numbers can be passed as separate arguments or as a single space-separated string:
 
 ```sh
 ./push_swap 3 2 1
 ./push_swap "--medium" "8 -3 0 42"
+./push_swap --complex 9 4 7 1 5 2
 ```
-
-The mode and `--bench` flag, if used, must appear before the numbers. The default mode is `--adaptive`. `--bench` writes its report to standard error, leaving the operation sequence on standard output.
 
 ### Check a sequence
 
-Pass the same initial values to `checker` and pipe the operations into it:
+Pipe the output of `push_swap` into `checker`, passing the same initial values to both programs:
 
 ```sh
 ./push_swap 3 2 1 | ./checker 3 2 1
 ```
 
-`checker` reads one operation per line from standard input and prints `OK` if stack A is in ascending order and stack B is empty; otherwise it prints `KO`. An unknown or empty instruction is an error.
+The checker reads instructions until the input stream ends. It can also be used manually:
+
+```sh
+./checker 3 2 1
+sa
+rra
+```
+
+Finish the input with `Ctrl+D` (Linux/macOS terminal).
 
 ### Clean build files
 
+Remove object files:
+
 ```sh
 make clean
+```
+
+Remove object files and executables:
+
+```sh
 make fclean
+```
+
+Rebuild the project from scratch:
+
+```sh
+make re
 ```
 
 ---
 
 ## Resources
 
-* K. N. King, *C Programming: A Modern Approach*
-  * Chapter 15: Writing Large Programs
-    * 15.1 Source Files
-    * 15.2 Header Files
-    * 15.3 Dividing a Program into Files
-    * 15.4 Building a Multiple-File Program
-  * Chapter 16: Structures, Unions, and Enumerations
-    * 16.1 Structure Variables
-    * 16.2 Structure Types
-  * Chapter 17: Advanced Uses of Pointers
-    * 17.1 Dynamic Storage Allocation
-    * 17.4 Deallocating Storage
-    * 17.5 Linked Lists
-    * 17.6 Pointers to Pointers
-  * Chapter 9.6: Recursion
-* CS50x, [Week 3: Algorithms](https://cs50.harvard.edu/x/weeks/3/)
+- **K. N. King, _C Programming: A Modern Approach_**
+  - Chapter 15: Writing Large Programs
+	- 15.1 Source Files
+	- 15.2 Header Files
+	- 15.3 Dividing a Program into Files
+	- 15.4 Building a Multiple-File Program
+  - Chapter 16: Structures, Unions, and Enumerations
+	- 16.1 Structure Variables
+	- 16.2 Structure Types
+  - Chapter 17: Advanced Uses of Pointers
+	- 17.1 Dynamic Storage Allocation
+	- 17.4 Deallocating Storage
+	- 17.5 Linked Lists
+	- 17.6 Pointers to Pointers
+  - Chapter 9.6: Recursion
+- **CS50x**
+  - [Week 3: Algorithms](https://cs50.harvard.edu/x/weeks/3/)
+- **42**
+  - Push_swap subject and project requirements.
+
+---
 
 ## Authors
 
-This project was created as part of the 42 curriculum by **joamunoz** and **divillan**.
+This project was developed collaboratively by **joamunoz** and **divillan** as part of the 42 Common Core curriculum.
+
+The work began with an initial division of focus:
+
+| Contributor | Initial area of focus |
+|---|---|
+| **joamunoz** | Parsing, input validation and indexing. |
+| **divillan** | Design and implementation of the sorting strategies and algorithms. |
+
+Once the initial components were working together and the project had reached a functional state, development moved into a shared refinement phase. Both contributors worked across the codebase to improve, optimize and adapt the existing implementation, as well as to integrate the different components.
+
+Consequently, the areas above describe the **initial distribution of work**, not exclusive ownership of specific files or features. The final implementation is the result of joint development and collaboration.
