@@ -6,7 +6,7 @@
 /*   By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/10/02 16:29:40 by joamunoz          #+#    #+#             */
-/*   Updated: 2026/10/25 07:04:09 by joamunoz         ###   ########.fr       */
+/*   Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,14 @@ void	pa(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_b, stack_a);
 	bench_record_operation(OP_PA);
-	write(STDOUT_FILENO, "pa\n", 3);
+	if (!bench_state()->quiet)
+		write(STDOUT_FILENO, "pa\n", 3);
 }
 
 void	pb(t_stack **stack_a, t_stack **stack_b)
 {
 	push(stack_a, stack_b);
 	bench_record_operation(OP_PB);
-	write(STDOUT_FILENO, "pb\n", 3);
+	if (!bench_state()->quiet)
+		write(STDOUT_FILENO, "pb\n", 3);
 }
