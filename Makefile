@@ -2,9 +2,11 @@
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
-#                                                    +#+#+#+#+#+   +#+           #
-#    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#             #
-#    Updated: 2026/11/04 00:00:00 by divillan         ###   ########.fr       #
+#                                                     +:+ +:+         +:+      #
+#    By: joamunoz <joamunoz@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2026/07/15 17:54:04 by joamunoz          #+#    #+#              #
+#    Updated: 2026/11/18 12:07:20 by joamunoz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -12,7 +14,7 @@ NAME = push_swap
 BONUS_NAME = checker
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -g
+CFLAGS = -Wall -Wextra -Werror
 
 COMMON_SOURCE_FILES = \
 	a_chunk.c \
